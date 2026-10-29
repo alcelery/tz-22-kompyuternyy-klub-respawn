@@ -986,3 +986,186 @@ ul {
     border: 1px solid rgba(255,255,255,0.05);
   }
 }
+
+/* =========================================
+   СТРАНИЦА КОНТАКТОВ
+   ========================================= */
+
+/* Блок с контактами и картой */
+.contacts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+.contacts-card {
+  background-color: var(--surface-color);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--border-radius);
+  padding: 32px 24px;
+}
+
+.contacts-card__title {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: var(--accent-color);
+}
+
+.contact-item {
+  margin-bottom: 24px;
+}
+
+.contact-item:last-child {
+  margin-bottom: 0;
+}
+
+.contact-item__label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.contact-item__value {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.contact-item__link {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  transition: color 0.3s;
+}
+
+.contact-item__link:hover {
+  color: var(--accent-color);
+}
+
+/* Заглушка карты */
+.contacts-map {
+  min-height: 300px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #000;
+}
+
+.map-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4; /* Затемняем картинку-заглушку */
+}
+
+.map-placeholder__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.map-placeholder__overlay span {
+  background-color: rgba(0,0,0,0.7);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Блок формы обратной связи */
+.feedback-wrapper {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.feedback-title {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.feedback-desc {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Чекбокс */
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.form-checkbox input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: var(--accent-color); /* Делает галочку фирменного цвета */
+}
+
+.form-checkbox label {
+  cursor: pointer;
+}
+
+.form-checkbox a {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+/* Адаптив */
+@media (min-width: 768px) {
+  .contacts-grid {
+    grid-template-columns: 1fr 1fr; /* Карта и контакты 50/50 */
+    gap: 40px;
+  }
+  
+  .contacts-card {
+    padding: 40px;
+  }
+
+  .contacts-map {
+    min-height: 100%; /* Карта растягивается на высоту блока с контактами */
+  }
+
+  .feedback-wrapper {
+    flex-direction: row;
+    padding: 48px;
+    gap: 64px;
+  }
+
+  .feedback-info {
+    flex: 1;
+    position: sticky;
+    top: 100px;
+  }
+
+  .feedback-form {
+    flex: 1;
+  }
+}
