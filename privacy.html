@@ -3,36 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Игровые зоны — РЕСПАУН</title>
-  <meta name="description" content="Игровые зоны компьютерного клуба РЕСПАУН: стандарт, VIP, консоли.">
-  <link rel="icon" href="img/favicon.ico">
+  
+  <!-- SEO -->
+  <title>Политика конфиденциальности | Компьютерный клуб РЕСПАУН</title>
+  <meta name="description" content="Политика конфиденциальности и обработки персональных данных компьютерного клуба РЕСПАУН. Условия сбора, хранения и использования данных.">
+  <meta name="robots" content="noindex, nofollow"> <!-- Служебная страница, скрываем от поиска -->
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Политика конфиденциальности | РЕСПАУН">
+  <meta property="og:image" content="img/bolvanka.jpg">
+  
+  <link rel="icon" href="img/favicon.png" type="image/jpeg">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
 </head>
-<body class="page-zones">
+<body class="page-privacy">
 
-  <!-- тот же header -->
+  <!-- БЛОК 1: ШАПКА И МЕНЮ -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
+      
+      <nav class="nav" id="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+          <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
+          <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
+          <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
+          <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
+          <li class="nav__item"><a href="reaction.html" class="nav__link">Реакция</a></li>
+          <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click" data-button-name="header_book">Забронировать</a>
+        
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
   <main>
-    <!-- Блок 1: Заголовок страницы + хлебные крошки -->
-    <section class="page-head">
+    <!-- ШАПКА СТРАНИЦЫ -->
+    <section class="page-header">
       <div class="container">
-        <nav class="breadcrumbs">
-          <a href="index.html">Главная</a> / <span>Зоны</span>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <a href="index.html">Главная</a> <span class="breadcrumbs__sep">/</span> <span aria-current="page">Политика конфиденциальности</span>
         </nav>
-        <h1>Игровые зоны</h1>
+        <div class="page-header__content">
+          <h1 class="page-title">Политика конфиденциальности</h1>
+        </div>
       </div>
     </section>
 
-    <!-- Блок 2: Перечень зон -->
-    <section class="zones-list">…</section>
+    <!-- БЛОК 2: ТЕКСТ ПОЛИТИКИ -->
+    <section class="privacy-section section">
+      <div class="container">
+        <div class="privacy-content">
+          
+          <h2>1. Общие положения</h2>
+          <p>Настоящая Политика конфиденциальности (далее — Политика) действует в отношении всей информации, которую Общество с ограниченной ответственностью «Респаун» (далее — Оператор), расположенное по адресу: 614 122, г. Новосибирск, ул. Студенческая, д. 2 (ТЦ «Орбита», 3 этаж), может получить о Пользователе во время использования сайта компьютерного клуба «РЕСПАУН».</p>
+          <p>Использование сайта означает безоговорочное согласие Пользователя с настоящей Политикой и указанными в ней условиями обработки его персональной информации. В случае несогласия с этими условиями Пользователь должен воздержаться от использования сайта.</p>
 
-    <!-- Блок 3: CTA «Забронировать» -->
-    <section class="cta">…</section>
+          <h2>2. Цели сбора персональной информации</h2>
+          <p>Оператор собирает и обрабатывает персональные данные Пользователей в следующих целях:</p>
+          <ul>
+            <li>Оформление и подтверждение бронирования игровых мест в клубе;</li>
+            <li>Регистрация команд на участие в турнирах (включая турнир «Зимний кубок»);</li>
+            <li>Связь с Пользователем для подтверждения заявки, уточнения деталей или информирования об изменениях;</li>
+            <li>Проведение статистических и аналитических исследований на основе обезличенных данных (с использованием Google Analytics 4) для улучшения качества сервиса.</li>
+          </ul>
+
+          <h2>3. Состав собираемых данных</h2>
+          <p>Оператор может собирать следующие данные, которые Пользователь добровольно предоставляет при заполнении форм на сайте:</p>
+          <ul>
+            <li>Имя (никнейм) Пользователя или капитана команды;</li>
+            <li>Контактный номер телефона;</li>
+            <li>Адрес электронной почты (при наличии);</li>
+            <li>Данные о бронировании (выбранная зона, дата, время, количество мест);</li>
+            <li>Название команды и список игроков (при регистрации на турнир).</li>
+          </ul>
+          <p>Также автоматически собираются обезличенные данные о посещении сайта (IP-адрес, тип браузера, источник перехода, действия на странице) с помощью сервисов веб-аналитики (Google Analytics, Яндекс.Метрика).</p>
+
+          <h2>4. Условия обработки и передачи данных</h2>
+          <p>Обработка персональных данных Пользователя осуществляется без ограничения срока любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.</p>
+          <p>Оператор не передает персональные данные Пользователей третьим лицам, за исключением случаев, предусмотренных законодательством РФ, а также случаев передачи данных в системы веб-аналитики в обезличенном виде.</p>
+
+          <h2>5. Права Пользователя</h2>
+          <p>Пользователь вправе в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление по адресу электронной почты book@respawn-club.example или по почтовому адресу, указанному в разделе 1.</p>
+          <p>При отзыве согласия Оператор прекращает обработку данных и уничтожает их в срок, не превышающий 30 дней с момента получения уведомления.</p>
+
+          <h2>6. Заключительные положения</h2>
+          <p>Оператор вправе вносить изменения в настоящую Политику. Новая редакция вступает в силу с момента ее размещения на сайте, если иное не предусмотрено новой редакцией Политики.</p>
+          <p>К настоящей Политике и отношениям между Пользователем и Оператором применяется действующее законодательство Российской Федерации.</p>
+          
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- тот же footer -->
-  <!-- те же скрипты -->
+  <!-- БЛОК 3: ПОДВАЛ -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__info">
+        <a href="index.html" class="logo footer__logo">РЕСПАУН</a>
+        <p class="footer__address">614 122, г. Новосибирск, ул. Студенческая, д. 2 (ТЦ «Орбита», 3 этаж)</p>
+      </div>
+      
+      <div class="footer__nav">
+        <h3 class="footer__title">Меню</h3>
+        <ul class="footer__list">
+          <li><a href="zones.html" class="footer__link">Зоны</a></li>
+          <li><a href="prices.html" class="footer__link">Цены</a></li>
+          <li><a href="games.html" class="footer__link">Игры</a></li>
+          <li><a href="tournament.html" class="footer__link">Турниры</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contacts">
+        <h3 class="footer__title">Контакты</h3>
+        <div class="footer__socials" data-event="social_click">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        </div>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+      </div>
+    </div>
+    
+    <div class="container footer__bottom">
+      <p>&copy; 2026 ООО «Респаун». Все права защищены.</p>
+      <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
+    </div>
+  </footer>
+
 </body>
 </html>
