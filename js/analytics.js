@@ -49,11 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Событие 7: generate_lead (Ключевое)
   // Отправляется ТОЛЬКО после успешного ответа сервера (ok: true)
   // Вызывается из формы (forms.js), поэтому мы экспортируем функцию наружу
+  // Событие 7: generate_lead
   window.sendGenerateLead = function(leadType, leadZone, value) {
     sendEvent('generate_lead', {
-      lead_type: leadType, // booking или tournament
-      lead_zone: leadZone, // standard, vip, bootcamp, ps5
-      value: value,        // Сумма
+      lead_type: leadType,
+      lead_zone: leadZone,
+      value: value,
       currency: 'RUB'
     });
   };
@@ -110,8 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Событие 18: form_error (Ошибка формы)
-  // Вызываем из forms.js при ошибке валидации
+  // Событие 18: form_error
   window.sendFormError = function(fieldName, errorType) {
     sendEvent('form_error', {
       field_name: fieldName,
