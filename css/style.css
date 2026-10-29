@@ -1,20 +1,511 @@
+/* --- Базовые переменные --- */
 :root {
-  --color-bg: #0d0f14;
-  --color-surface: #161a22;
-  --color-text: #e8ecf1;
-  --color-muted: #8a94a6;
-  --color-accent: #00e676;   /* «респавн»-зелёный */
-  --color-accent-2: #7c4dff;
-  --radius: 14px;
-  --container: 1200px;
-  --font-main: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --bg-color: #0f1115;
+  --surface-color: #1a1d24;
+  --text-main: #f0f2f5;
+  --text-muted: #9ba1ad;
+  --accent-color: #00e676;
+  --accent-hover: #00c853;
+  --accent-active: #009624;
+  --border-radius: 12px;
+  --container-width: 1200px;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-main); line-height: 1.6; }
-.container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
-a { color: inherit; text-decoration: none; }
-.btn { display: inline-block; padding: 12px 22px; border-radius: var(--radius); }
-.btn--accent { background: var(--color-accent); color: #05130a; font-weight: 600; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* header, nav, burger, footer, page-head, breadcrumbs — по аналогии */
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.section__title {
+  font-size: 28px;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+/* =========================================
+   ОБНОВЛЕННЫЕ КНОПКИ
+   ========================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px; /* Увеличенная высота для удобства нажатия */
+  padding: 12px 32px;
+  border-radius: 8px; /* Чуть менее круглые, более строгие */
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent;
+  text-align: center;
+  text-transform: uppercase; /* Для стиля геймерских кнопок */
+  letter-spacing: 0.5px;
+  font-family: inherit;
+}
+
+/* Эффект нажатия */
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+/* Основная (акцентная) кнопка */
+.btn--primary {
+  background-color: var(--accent-color);
+  color: #000;
+  box-shadow: 0 4px 0 var(--accent-active); /* Объемная тень снизу */
+}
+
+.btn--primary:hover {
+  background-color: var(--accent-hover);
+  box-shadow: 0 4px 0 #007b1e;
+  transform: translateY(-2px);
+}
+
+/* Кнопка с обводкой (для карточек) */
+.btn--outline {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
+}
+
+.btn--outline:hover {
+  background-color: var(--accent-color);
+  color: #000;
+  box-shadow: 0 4px 0 var(--accent-active);
+  transform: translateY(-2px);
+}
+
+/* Размеры */
+.btn--large {
+  font-size: 18px;
+  padding: 16px 40px;
+  min-height: 56px;
+}
+
+.btn--small {
+  font-size: 14px;
+  padding: 8px 20px;
+  min-height: 44px; /* Минимум 44px по требованиям доступности */
+  text-transform: none;
+}
+
+.btn--full-width {
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* Свечение для главной кнопки на первом экране */
+.btn--glow {
+  box-shadow: 0 4px 0 var(--accent-active), 0 0 20px rgba(0, 230, 118, 0.4);
+}
+.btn--glow:hover {
+  box-shadow: 0 4px 0 #007b1e, 0 0 30px rgba(0, 230, 118, 0.6);
+}
+
+/* =========================================
+   ШАПКА
+   ========================================= */
+.header {
+  background-color: rgba(15, 17, 21, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 10px 0;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  gap: 16px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--accent-color);
+}
+
+.nav {
+  display: none;
+}
+
+.header__phone {
+  display: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Бургер */
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.burger__line {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-main);
+  transition: 0.3s;
+}
+
+/* =========================================
+   ПЕРВЫЙ ЭКРАН
+   ========================================= */
+.hero {
+  padding: 40px 0;
+  background: radial-gradient(circle at top right, rgba(0, 230, 118, 0.15), transparent 60%);
+}
+
+.hero__container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.hero__title {
+  font-size: 36px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.hero__subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.hero__image img {
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   ЗОНЫ
+   ========================================= */
+.zones__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.zone-card {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.zone-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  border-color: rgba(0, 230, 118, 0.3);
+}
+
+.zone-card__content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.zone-card__title {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.zone-card__desc {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+/* =========================================
+   ТУРНИР
+   ========================================= */
+.promo-banner {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  padding: 40px 24px;
+  border-left: 4px solid var(--accent-color);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.badge {
+  display: inline-block;
+  background-color: rgba(0, 230, 118, 0.15);
+  color: var(--accent-color);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.promo-banner__title {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.promo-banner__text {
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  max-width: 600px;
+  font-size: 18px;
+}
+
+/* =========================================
+   ВИДЕО
+   ========================================= */
+.video-wrapper {
+  position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: #000;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.club-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* =========================================
+   ПОДВАЛ
+   ========================================= */
+.footer {
+  background-color: var(--surface-color);
+  padding: 60px 0 20px;
+  margin-top: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.footer__title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: var(--text-main);
+}
+
+.footer__list li {
+  margin-bottom: 12px;
+}
+
+.footer__link {
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+
+.footer__link:hover {
+  color: var(--accent-color);
+}
+
+.footer__socials {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.footer__socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  font-weight: bold;
+  color: var(--text-muted);
+  transition: all 0.3s;
+}
+
+.footer__socials a:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #000;
+}
+
+.footer__phone {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-main);
+  transition: color 0.3s;
+}
+.footer__phone:hover {
+  color: var(--accent-color);
+}
+
+.footer__bottom {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.footer__privacy:hover {
+  color: var(--text-main);
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ
+   ========================================= */
+
+@media (min-width: 768px) {
+  .section__title { font-size: 36px; }
+  
+  .hero__title { font-size: 56px; }
+  .hero__subtitle { font-size: 20px; }
+  
+  .zones__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .footer__container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section { padding: 100px 0; }
+  
+  .burger { display: none; }
+  .header__phone { display: block; }
+  
+  .nav {
+    display: block;
+    margin: 0 auto 0 48px;
+  }
+  
+  .nav__list {
+    display: flex;
+    gap: 32px;
+  }
+  
+  .nav__link {
+    font-size: 16px;
+    padding: 8px 0;
+    position: relative;
+    font-weight: 500;
+  }
+  
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  
+  .nav__link:hover::after,
+  .nav__link--active::after {
+    transform: scaleX(1);
+  }
+  
+  .nav__link--active {
+    color: var(--accent-color);
+  }
+  
+  .hero {
+    padding: 120px 0 80px;
+  }
+  
+  .hero__container {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .hero__content {
+    flex: 1;
+    padding-right: 60px;
+  }
+  
+  .hero__image {
+    flex: 1;
+  }
+  
+  .zones__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -3,77 +3,180 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>РЕСПАУН — компьютерный клуб</title>
-  <meta name="description" content="Компьютерный клуб РЕСПАУН рядом с вузами и колледжем. Мощные ПК, игровые зоны, турниры.">
-  <link rel="icon" href="img/favicon.ico">
+  
+  <title>Компьютерный клуб РЕСПАУН | Играй рядом с вузом</title>
+  <meta name="description" content="Современный компьютерный клуб РЕСПАУН рядом с твоим вузом. Мощные ПК, уютные зоны, турниры и скидки для студентов. Бронируй место онлайн!">
+  
+  <meta property="og:title" content="Компьютерный клуб РЕСПАУН">
+  <meta property="og:description" content="Играй рядом с вузом. Скидки до 14:00. Бронируй место онлайн!">
+  <meta property="og:image" content="https://respawn-club.ru/img/og-index.webp">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://respawn-club.ru/">
+  
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
 </head>
 <body class="page-index">
 
-  <header class="site-header">
-    <div class="container header__inner">
-      <a href="index.html" class="logo">РЕСПАУН</a>
-      <nav class="nav" id="nav">
+  <!-- БЛОК 1: ШАПКА И МЕНЮ -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
+      
+      <nav class="nav" id="nav" aria-label="Главное меню">
         <ul class="nav__list">
-          <li><a href="index.html" class="nav__link is-active">Главная</a></li>
-          <li><a href="zones.html" class="nav__link">Зоны</a></li>
-          <li><a href="prices.html" class="nav__link">Цены</a></li>
-          <li><a href="games.html" class="nav__link">Игры</a></li>
-          <li><a href="tournament.html" class="nav__link">Турниры</a></li>
-          <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+          <li class="nav__item"><a href="index.html" class="nav__link nav__link--active" aria-current="page">Главная</a></li>
+          <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
+          <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
+          <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
+          <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
+          <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
         </ul>
       </nav>
-      <a href="reaction.html" class="btn btn--accent">Забронировать</a>
-      <button class="burger" id="burger" aria-label="Меню"></button>
+
+      <div class="header__actions">
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <!-- Сделали кнопку бронирования в шапке более заметной -->
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- Блок 1: Hero -->
-    <section class="hero">…</section>
-    <!-- Блок 2: Преимущества -->
-    <section class="features">…</section>
-    <!-- Блок 3: Зоны (кратко) -->
-    <section class="zones-preview">…</section>
-    <!-- Блок 4: Тарифы (кратко) -->
-    <section class="prices-preview">…</section>
-    <!-- Блок 5: Турниры (анонс) -->
-    <section class="tournament-preview">…</section>
-    <!-- Блок 6: CTA + карта -->
-    <section class="cta">…</section>
+    <!-- БЛОК 2: ПЕРВЫЙ ЭКРАН -->
+    <section class="hero">
+      <div class="container hero__container">
+        <div class="hero__content">
+          <h1 class="hero__title">Твой респавн начинается здесь</h1>
+          <p class="hero__subtitle">Скидка 30% на игру до 14:00 для студентов. Мощные ПК, быстрый интернет и комфортная атмосфера.</p>
+          
+          <!-- Главная CTA-кнопка. Теперь это крупная, заметная кнопка -->
+          <a href="reaction.html" class="btn btn--primary btn--large btn--glow" data-event="cta_click">
+            Забронировать место
+          </a>
+        </div>
+        <div class="hero__image">
+          <img src="img/hero-pc.webp" alt="Игровое место в компьютерном клубе РЕСПАУН" width="600" height="400" fetchpriority="high">
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 3: ЗОНЫ -->
+    <section class="zones section">
+      <div class="container">
+        <h2 class="section__title">Наши зоны</h2>
+        <div class="zones__grid" data-event="zone_view">
+          
+          <a href="zones.html#standard" class="zone-card">
+            <img src="img/zone-standard.webp" alt="Зона Стандарт" class="zone-card__img" loading="lazy" width="300" height="200">
+            <div class="zone-card__content">
+              <h3 class="zone-card__title">Стандарт</h3>
+              <p class="zone-card__desc">RTX 3060 / 144Hz</p>
+              <!-- Кнопка внутри карточки -->
+              <span class="btn btn--outline btn--full-width">Подробнее</span>
+            </div>
+          </a>
+
+          <a href="zones.html#vip" class="zone-card">
+            <img src="img/zone-vip.webp" alt="VIP-зона" class="zone-card__img" loading="lazy" width="300" height="200">
+            <div class="zone-card__content">
+              <h3 class="zone-card__title">VIP</h3>
+              <p class="zone-card__desc">RTX 4070 / 240Hz</p>
+              <span class="btn btn--outline btn--full-width">Подробнее</span>
+            </div>
+          </a>
+
+          <a href="zones.html#console" class="zone-card">
+            <img src="img/zone-console.webp" alt="Консольная зона" class="zone-card__img" loading="lazy" width="300" height="200">
+            <div class="zone-card__content">
+              <h3 class="zone-card__title">Консоли</h3>
+              <p class="zone-card__desc">PS5 / Xbox Series X</p>
+              <span class="btn btn--outline btn--full-width">Подробнее</span>
+            </div>
+          </a>
+
+          <a href="zones.html#bootcamp" class="zone-card">
+            <img src="img/zone-bootcamp.webp" alt="Буткемп для команд" class="zone-card__img" loading="lazy" width="300" height="200">
+            <div class="zone-card__content">
+              <h3 class="zone-card__title">Буткемп</h3>
+              <p class="zone-card__desc">Для команд 5х5</p>
+              <span class="btn btn--outline btn--full-width">Подробнее</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 4: ТУРНИР «ЗИМНИЙ КУБОК» -->
+    <section class="tournament-promo section" data-event="tournament_view">
+      <div class="container">
+        <div class="promo-banner">
+          <div class="promo-banner__content">
+            <span class="badge">Скоро</span>
+            <h2 class="promo-banner__title">Турнир «Зимний кубок»</h2>
+            <p class="promo-banner__text">Собирай команду и сражайся за призовой фонд в 50 000 рублей. Дисциплины: CS2 и Dota 2.</p>
+            <!-- Кнопка перехода на страницу турниров -->
+            <a href="tournament.html" class="btn btn--primary btn--large">Подробнее о турнире</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 5: ВИДЕО КЛУБА -->
+    <section class="video-section section" data-event="video_play">
+      <div class="container">
+        <h2 class="section__title">Атмосфера клуба</h2>
+        <div class="video-wrapper">
+          <video class="club-video" controls preload="none" poster="img/video-poster.webp">
+            <source src="video/club-tour.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer__inner">
-      <div class="footer__col">
-        <a href="index.html" class="logo">РЕСПАУН</a>
-        <p>Компьютерный клуб рядом с твоим вузом.</p>
+  <!-- БЛОК 6: ПОДВАЛ -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__info">
+        <a href="index.html" class="logo footer__logo">РЕСПАУН</a>
+        <p class="footer__address">г. Москва, ул. Студенческая, д. 15<br>(в 2 минутах от главного корпуса)</p>
       </div>
-      <div class="footer__col">
-        <h3>Меню</h3>
-        <ul>
-          <li><a href="zones.html">Зоны</a></li>
-          <li><a href="prices.html">Цены</a></li>
-          <li><a href="games.html">Игры</a></li>
-          <li><a href="tournament.html">Турниры</a></li>
-          <li><a href="contacts.html">Контакты</a></li>
+      
+      <div class="footer__nav">
+        <h3 class="footer__title">Меню</h3>
+        <ul class="footer__list">
+          <li><a href="zones.html" class="footer__link">Зоны</a></li>
+          <li><a href="prices.html" class="footer__link">Цены</a></li>
+          <li><a href="games.html" class="footer__link">Игры</a></li>
+          <li><a href="tournament.html" class="footer__link">Турниры</a></li>
         </ul>
       </div>
-      <div class="footer__col">
-        <h3>Контакты</h3>
-        <p>г. Москва, ул. Примерная, 1</p>
-        <p><a href="tel:+70000000000">+7 (000) 000-00-00</a></p>
+
+      <div class="footer__contacts">
+        <h3 class="footer__title">Контакты</h3>
+        <div class="footer__socials" data-event="social_click">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        </div>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
       </div>
     </div>
-    <div class="footer__bottom container">
-      <span>© 2025 РЕСПАУН. Все права защищены.</span>
-      <a href="privacy.html">Политика конфиденциальности</a>
+    
+    <div class="container footer__bottom">
+      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/forms.js"></script>
 </body>
 </html>
