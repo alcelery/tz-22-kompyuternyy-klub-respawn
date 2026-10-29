@@ -1999,3 +1999,22 @@ ul {
   .social-buttons { flex-direction: row; }
   .social-btn { min-width: 200px; }
 }
+
+@media (min-width: 1024px) {
+  /* ... остальные стили ... */
+  
+  .nav {
+    display: block;
+    margin: 0 auto 0 24px; /* Уменьшили отступ слева от логотипа */
+  }
+  
+  .nav__list {
+    display: flex;
+    gap: 20px; /* Уменьшили расстояние между пунктами меню */
+  }
+  
+  .nav__link {
+    font-size: 15px; /* Чуть уменьшили шрифт, чтобы всё влезло */
+    /* ... */
+  }
+}
