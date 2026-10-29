@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const params = new URLSearchParams({
+      type: 'booking', // <--- ДОБАВИЛИ ТИП (для thanks.js)
       zone: zoneSelect.value,
       date: dateInput.value,
       time: timeInput.value,
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Собираем URL и сразу перекидываем на thanks.html
       const params = new URLSearchParams({
+        type: 'package', // <--- ДОБАВИЛИ ТИП (для thanks.js)
         zone: zoneValue,
         date: currentDate,
         time: currentTime,

@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ticketNumber = document.getElementById('ticketNumber');
   const ticketZone = document.getElementById('ticketZone');
   const ticketTime = document.getElementById('ticketTime');
+  const ticketPrice = document.getElementById('ticketPrice');
 
   // 1. Генерируем номер брони (например, RSP-4821)
   const randomNum = Math.floor(1000 + Math.random() * 9000);
@@ -16,13 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const zone = urlParams.get('zone') || urlParams.get('zone_display');
   const date = urlParams.get('date');
   const time = urlParams.get('time');
-  const type = urlParams.get('type'); // Для турниров
+  const type = urlParams.get('type'); // booking, package, tournament
+  const total = urlParams.get('total');
 
   // Перевод названий зон на русский
   const zoneNames = {
     'standard': 'Стандарт',
     'vip': 'VIP',
     'console': 'Консоли',
+    'ps5': 'PlayStation 5',
+    'bootcamp': 'Bootcamp',
     'night': 'Ночной пакет'
   };
 
@@ -33,14 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (zone && zoneNames[zone]) {
       ticketZone.textContent = zoneNames[zone];
     } else if (zone) {
-      ticketZone.textContent = zone; // Если пришло что-то нестандартное
+      ticketZone.textContent = zone;
     }
   }
 
   // Подставляем дату и время
   if (ticketTime) {
     if (date && time) {
-      // Форматируем дату из YYYY-MM-DD в DD.MM.YYYY
       const dateParts = date.split('-');
       const formattedDate = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
       ticketTime.textContent = `${formattedDate} в ${time}`;
@@ -50,40 +53,28 @@ document.addEventListener('DOMContentLoaded', () => {
       ticketTime.textContent = 'Сегодня (уточните время у администратора)';
     }
   }
-  
-  // ... в конце функции document.addEventListener('DOMContentLoaded', () => { ...
 
-  const ticketPrice = document.getElementById('ticketPrice');
-  const totalPrice = urlParams.get('total');
-
-  if (ticketPrice && totalPrice) {
-    ticketPrice.textContent = `${totalPrice} ₽`;
+  // Подставляем цену
+  if (ticketPrice && total) {
+    ticketPrice.textContent = `${total} ₽`;
   }
-
-  if (typeof window.sendGenerateLead === 'function') {
-  // Можно передать 'tournament', если в URL есть type=tournament
-  const type = urlParams.get('type') || 'booking';
-  const zone = urlParams.get('zone') || 'unknown';
-  const total = urlParams.get('total') || 0;
-  
-  window.sendGenerateLead(type, zone, total);
-  }
-
-  urlParams = new URLSearchParams(window.location.search);
 
   // === ОТПРАВКА СОБЫТИЯ generate_lead ===
   // Проверяем, не отправляли ли мы уже это событие в текущей сессии
   if (!sessionStorage.getItem('lead_sent')) {
     
-    // Берем данные из URL
-    const type = urlParams.get('type') || 'booking'; // если турнир - придет 'tournament'
-    const zone = urlParams.get('zone') || urlParams.get('zone_display') || 'unknown';
-    const total = urlParams.get('total') || 0;
+    // Определяем тип лида для GA4
+    let leadType = 'booking'; // По умолчанию (для калькулятора и пакетов)
+    if (type === 'tournament') {
+      leadType = 'tournament';
+    }
 
-    // Отправляем событие
+    const leadZone = zone || 'unknown';
+    const leadTotal = total || 0;
+
     if (typeof window.sendGenerateLead === 'function') {
-      window.sendGenerateLead(type, zone, total);
-      console.log('[Thanks] Событие generate_lead отправлено');
+      window.sendGenerateLead(leadType, leadZone, leadTotal);
+      console.log(`[Thanks] Событие generate_lead отправлено (Тип: ${leadType}, Зона: ${leadZone}, Сумма: ${leadTotal})`);
       
       // Запоминаем, что лид уже отправлен, чтобы не дублировать при обновлении страницы
       sessionStorage.setItem('lead_sent', 'true');
