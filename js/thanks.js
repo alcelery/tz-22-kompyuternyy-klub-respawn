@@ -59,4 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ticketPrice && totalPrice) {
     ticketPrice.textContent = `${totalPrice} ₽`;
   }
+
+  if (typeof window.sendGenerateLead === 'function') {
+  // Можно передать 'tournament', если в URL есть type=tournament
+  const type = urlParams.get('type') || 'booking';
+  const zone = urlParams.get('zone') || 'unknown';
+  const total = urlParams.get('total') || 0;
+  
+  window.sendGenerateLead(type, zone, total);
+  }
 });

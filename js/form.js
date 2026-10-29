@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bookingForm = document.getElementById('bookingForm');
   if (!bookingForm) return;
 
-  // Получаем параметры из URL
+  // Получаем параметры из URL (например, ?zone=vip&date=2025-05-20&time=10:00&seats=2&hours=3&total=1470)
   const urlParams = new URLSearchParams(window.location.search);
 
   // Проверяем, есть ли параметры
@@ -38,12 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (totalDisplay && totalPrice) {
         totalPrice.textContent = `${total} ₽`;
-        totalDisplay.style.display = 'flex'; 
+        totalDisplay.style.display = 'flex'; // Показываем блок
       }
       
+      // Записываем в скрытое поле для отправки на сервер/в thanks.html
       if (hiddenTotal) hiddenTotal.value = total;
     }
   } else {
+    // Если параметров нет (зашли напрямую), ставим сегодняшнюю дату
     const today = new Date().toISOString().split('T')[0];
     const dateInput = document.getElementById('bookDate');
     if (dateInput) {
@@ -52,21 +54,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // === ОТПРАВКА ФОРМЫ И СОБЫТИЕ generate_lead ===
+  // === ОБРАБОТКА ОТПРАВКИ И ВАЛИДАЦИЯ (для form_error) ===
   bookingForm.addEventListener('submit', (e) => {
-    // Поскольку форма отправляется методом GET на thanks.html, 
-    // мы перехватываем отправку, шлем событие и переходим.
-    // (Если в будущем будете делать отправку через fetch, логика та же).
-    
-    const zone = document.getElementById('bookZone').value;
-    const total = document.getElementById('paramTotal').value || 0;
+    const phoneInput = document.getElementById('bookPhone');
+    const phoneValue = phoneInput.value.replace(/\D/g, ''); // Оставляем только цифры
 
-    // Отправляем событие generate_lead
-    if (typeof window.sendGenerateLead === 'function') {
-      window.sendGenerateLead('booking', zone, total);
+    // Если телефон короче 11 цифр — это ошибка
+    if (phoneValue.length < 11) {
+      e.preventDefault(); // Останавливаем отправку формы
+      
+      // Вызываем событие form_error для GA4
+      if (typeof window.sendFormError === 'function') {
+        window.sendFormError('phone', 'invalid_format');
+      }
+
+      // Визуально подсвечиваем поле и выводим ошибку (по ТЗ)
+      phoneInput.style.borderColor = 'red';
+      phoneInput.focus();
+      
+      // Если хочешь, можно добавить alert или вывод текста под полем. 
+      // Пока просто подсветим рамку и остановим отправку.
+      alert('Пожалуйста, введите корректный номер телефона (11 цифр).');
+      return;
     }
 
-    // Даем аналитике долю секунды, чтобы отправить запрос, и переходим
-    // (Обычно gtag успевает отправить событие через beacon transport)
+    // Если ошибок нет — форма уходит на thanks.html (по умолчанию)
+    // Событие generate_lead мы отправим из thanks.js, так как мы не используем fetch
   });
 });
