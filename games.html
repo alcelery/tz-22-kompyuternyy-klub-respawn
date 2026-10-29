@@ -3,36 +3,407 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Игровые зоны — РЕСПАУН</title>
-  <meta name="description" content="Игровые зоны компьютерного клуба РЕСПАУН: стандарт, VIP, консоли.">
-  <link rel="icon" href="img/favicon.ico">
+  
+  <!-- SEO -->
+  <title>Игры в клубе | Компьютерный клуб РЕСПАУН</title>
+  <meta name="description" content="Список установленных игр в компьютерном клубе РЕСПАУН. Более 60 популярных онлайн-игр, шутеров, стратегий и консольных эксклюзивов.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Игры в клубе РЕСПАУН">
+  <meta property="og:description" content="Ищите свою любимую игру. Более 60 тайтлов уже установлены на наших ПК.">
+  <meta property="og:image" content="img/bolvanka.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://respawn-club.ru/games.html">
+  
+  <link rel="icon" href="img/bolvanka.jpg" type="image/jpeg">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
+  <!-- Скрипт для поиска по играм -->
+  <script src="js/games.js" defer></script>
 </head>
-<body class="page-zones">
+<body class="page-games">
 
-  <!-- тот же header -->
+  <!-- БЛОК 1: ШАПКА И МЕНЮ -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
+      
+      <nav class="nav" id="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+          <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
+          <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
+          <li class="nav__item"><a href="games.html" class="nav__link nav__link--active" aria-current="page">Игры</a></li>
+          <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
+          <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
   <main>
-    <!-- Блок 1: Заголовок страницы + хлебные крошки -->
-    <section class="page-head">
+    <!-- ШАПКА СТРАНИЦЫ -->
+    <section class="page-header">
       <div class="container">
-        <nav class="breadcrumbs">
-          <a href="index.html">Главная</a> / <span>Зоны</span>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <a href="index.html">Главная</a> <span class="breadcrumbs__sep">/</span> <span aria-current="page">Игры</span>
         </nav>
-        <h1>Игровые зоны</h1>
+        <div class="page-header__content">
+          <h1 class="page-title">Игры</h1>
+          <p class="page-subtitle">В нашем клубе установлено более 60 актуальных игр. Используйте поиск, чтобы найти свой любимый тайтл.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Блок 2: Перечень зон -->
-    <section class="zones-list">…</section>
+    <!-- БЛОК 2: ПОИСК ПО ИГРАМ (game_search) -->
+    <section class="game-search-section section" data-event="game_search">
+      <div class="container">
+        <div class="search-wrapper">
+          <label for="gameSearch" class="visually-hidden">Поиск по играм</label>
+          <input type="text" id="gameSearch" class="form-control search-input" placeholder="🔍 Начните вводить название игры (например, CS2 или Dota)...">
+        </div>
+      </div>
+    </section>
 
-    <!-- Блок 3: CTA «Забронировать» -->
-    <section class="cta">…</section>
+    <!-- БЛОК 3: СПИСОК 60 ИГР -->
+    <section class="games-list-section section">
+      <div class="container">
+        
+        <!-- Сообщение, если ничего не найдено -->
+        <div id="noResults" class="no-results" style="display: none;">
+          <p>По вашему запросу ничего не найдено. Попробуйте изменить название.</p>
+        </div>
+
+        <!-- Сетка игр -->
+        <div class="games-grid" id="gamesGrid">
+          
+          <!-- CS2 -->
+          <div class="game-card" data-title="Counter-Strike 2 CS2 кс2">
+            <div class="game-card__icon">🔫</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Counter-Strike 2</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dota 2 -->
+          <div class="game-card" data-title="Dota 2 дота">
+            <div class="game-card__icon">⚔️</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Dota 2</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Valorant -->
+          <div class="game-card" data-title="Valorant валорант">
+            <div class="game-card__icon">🎯</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Valorant</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GTA V -->
+          <div class="game-card" data-title="GTA V ГТА 5">
+            <div class="game-card__icon">🚗</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">GTA V</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fortnite -->
+          <div class="game-card" data-title="Fortnite фортнайт">
+            <div class="game-card__icon">🏗️</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Fortnite</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Apex Legends -->
+          <div class="game-card" data-title="Apex Legends апекс">
+            <div class="game-card__icon">🛡️</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Apex Legends</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PUBG -->
+          <div class="game-card" data-title="PUBG ПАБГ">
+            <div class="game-card__icon">🍳</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">PUBG: Battlegrounds</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rust -->
+          <div class="game-card" data-title="Rust раст">
+            <div class="game-card__icon">⛏️</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Rust</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Minecraft -->
+          <div class="game-card" data-title="Minecraft майнкрафт">
+            <div class="game-card__icon">🧱</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Minecraft</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overwatch 2 -->
+          <div class="game-card" data-title="Overwatch 2 овервотч">
+            <div class="game-card__icon">🤖</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Overwatch 2</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- EA FC 24 -->
+          <div class="game-card" data-title="EA Sports FC 24 FIFA фифа">
+            <div class="game-card__icon">⚽</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">EA Sports FC 24</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--console">Консоли</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- NBA 2K24 -->
+          <div class="game-card" data-title="NBA 2K24 баскетбол">
+            <div class="game-card__icon">🏀</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">NBA 2K24</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--standart">Стандарт</span>
+                <span class="tag tag--console">Консоли</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cyberpunk 2077 -->
+          <div class="game-card" data-title="Cyberpunk 2077 киберпанк">
+            <div class="game-card__icon">🌆</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Cyberpunk 2077</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alan Wake 2 -->
+          <div class="game-card" data-title="Alan Wake 2 алан вейк">
+            <div class="game-card__icon">🔦</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Alan Wake 2</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Red Dead Redemption 2 -->
+          <div class="game-card" data-title="Red Dead Redemption 2 RDR2 рдр2">
+            <div class="game-card__icon">🤠</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Red Dead Redemption 2</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--vip">VIP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- God of War -->
+          <div class="game-card" data-title="God of War год оф вар">
+            <div class="game-card__icon">🪓</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">God of War</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--console">Консоли</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spider-Man 2 -->
+          <div class="game-card" data-title="Spider-Man 2 человек паук">
+            <div class="game-card__icon">🕷️</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Marvel's Spider-Man 2</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--console">Консоли</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- The Last of Us -->
+          <div class="game-card" data-title="The Last of Us одни из нас">
+            <div class="game-card__icon">🍄</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">The Last of Us Part I</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--console">Консоли</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mortal Kombat 1 -->
+          <div class="game-card" data-title="Mortal Kombat 1 мортал комбат">
+            <div class="game-card__icon">🐉</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Mortal Kombat 1</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--console">Консоли</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tekken 8 -->
+          <div class="game-card" data-title="Tekken 8 теккен">
+            <div class="game-card__icon">🥋</div>
+            <div class="game-card__info">
+              <h3 class="game-card__title">Tekken 8</h3>
+              <div class="game-card__tags">
+                <span class="tag tag--console">Консоли</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- НИЖЕ ИДУТ ИГРЫ-ЗАГЛУШКИ ДЛЯ ДОСТИЖЕНИЯ 60 ШТ -->
+          <!-- ========================================== -->
+
+          <div class="game-card" data-title="League of Legends LoL лол"><div class="game-card__icon">🧙‍♂️</div><div class="game-card__info"><h3 class="game-card__title">League of Legends</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="World of Warcraft WoW воркрафт"><div class="game-card__icon">🐲</div><div class="game-card__info"><h3 class="game-card__title">World of Warcraft</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Escape from Tarkov тарков"><div class="game-card__icon">🎒</div><div class="game-card__info"><h3 class="game-card__title">Escape from Tarkov</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Rainbow Six Siege радуга 6"><div class="game-card__icon">🚪</div><div class="game-card__info"><h3 class="game-card__title">Rainbow Six Siege</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Rocket League ракета"><div class="game-card__icon">🚀</div><div class="game-card__info"><h3 class="game-card__title">Rocket League</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span><span class="tag tag--console">Консоли</span></div></div></div>
+          <div class="game-card" data-title="Dead by Daylight дэд бай"><div class="game-card__icon">🔪</div><div class="game-card__info"><h3 class="game-card__title">Dead by Daylight</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Phasmophobia фазмофобия"><div class="game-card__icon">👻</div><div class="game-card__info"><h3 class="game-card__title">Phasmophobia</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Lethal Company"><div class="game-card__icon">📦</div><div class="game-card__info"><h3 class="game-card__title">Lethal Company</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Palworld палворлд"><div class="game-card__icon">🦖</div><div class="game-card__info"><h3 class="game-card__title">Palworld</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Terraria террария"><div class="game-card__icon">🌳</div><div class="game-card__info"><h3 class="game-card__title">Terraria</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Among Us амонг"><div class="game-card__icon">👨‍🚀</div><div class="game-card__info"><h3 class="game-card__title">Among Us</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Fall Guys фол гайс"><div class="game-card__icon">🍬</div><div class="game-card__info"><h3 class="game-card__title">Fall Guys</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Brawlhalla бравл"><div class="game-card__icon">🥊</div><div class="game-card__info"><h3 class="game-card__title">Brawlhalla</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Hearthstone хартстоун"><div class="game-card__icon">🃏</div><div class="game-card__info"><h3 class="game-card__title">Hearthstone</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Genshin Impact геншин"><div class="game-card__icon">🌸</div><div class="game-card__info"><h3 class="game-card__title">Genshin Impact</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span><span class="tag tag--console">Консоли</span></div></div></div>
+          <div class="game-card" data-title="Honkai Star Rail хонкай"><div class="game-card__icon">🚂</div><div class="game-card__info"><h3 class="game-card__title">Honkai: Star Rail</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="The Witcher 3 Ведьмак"><div class="game-card__icon">🐺</div><div class="game-card__info"><h3 class="game-card__title">The Witcher 3</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Elden Ring элден ринг"><div class="game-card__icon">💍</div><div class="game-card__info"><h3 class="game-card__title">Elden Ring</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Dark Souls 3 дарк соулс"><div class="game-card__icon">🔥</div><div class="game-card__info"><h3 class="game-card__title">Dark Souls 3</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Hogwarts Legacy хогвартс"><div class="game-card__icon">🪄</div><div class="game-card__info"><h3 class="game-card__title">Hogwarts Legacy</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Assassin's Creed Mirage асасин"><div class="game-card__icon">🗡️</div><div class="game-card__info"><h3 class="game-card__title">AC Mirage</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Starfield старфилд"><div class="game-card__icon">🌌</div><div class="game-card__info"><h3 class="game-card__title">Starfield</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Baldur's Gate 3 Балдурс гейт"><div class="game-card__icon">🎲</div><div class="game-card__info"><h3 class="game-card__title">Baldur's Gate 3</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Diablo 4 диабло"><div class="game-card__icon">😈</div><div class="game-card__info"><h3 class="game-card__title">Diablo IV</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Forza Horizon 5 форза"><div class="game-card__icon">🏎️</div><div class="game-card__info"><h3 class="game-card__title">Forza Horizon 5</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span><span class="tag tag--console">Консоли</span></div></div></div>
+          <div class="game-card" data-title="Gran Turismo 7 гран туризмо"><div class="game-card__icon">🏁</div><div class="game-card__info"><h3 class="game-card__title">Gran Turismo 7</h3><div class="game-card__tags"><span class="tag tag--console">Консоли</span></div></div></div>
+          <div class="game-card" data-title="It Takes Two ит тейкс ту"><div class="game-card__icon">🧩</div><div class="game-card__info"><h3 class="game-card__title">It Takes Two</h3><div class="game-card__tags"><span class="tag tag--console">Консоли</span></div></div></div>
+          <div class="game-card" data-title="A Way Out вей аут"><div class="game-card__icon">🚧</div><div class="game-card__info"><h3 class="game-card__title">A Way Out</h3><div class="game-card__tags"><span class="tag tag--console">Консоли</span></div></div></div>
+          <div class="game-card" data-title="Mortal Kombat 11 мортал комбат 11"><div class="game-card__icon">💀</div><div class="game-card__info"><h3 class="game-card__title">Mortal Kombat 11</h3><div class="game-card__tags"><span class="tag tag--console">Консоли</span></div></div></div>
+          <div class="game-card" data-title="Street Fighter 6 стрит файтер"><div class="game-card__icon">👊</div><div class="game-card__info"><h3 class="game-card__title">Street Fighter 6</h3><div class="game-card__tags"><span class="tag tag--console">Консоли</span></div></div></div>
+          <div class="game-card" data-title="Call of Duty MW3 кол оф дьюти"><div class="game-card__icon">💥</div><div class="game-card__info"><h3 class="game-card__title">Call of Duty: MW3</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Battlefield 2042 батлфилд"><div class="game-card__icon">🪖</div><div class="game-card__info"><h3 class="game-card__title">Battlefield 2042</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="The Finals финалс"><div class="game-card__icon">💰</div><div class="game-card__info"><h3 class="game-card__title">The Finals</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="Sea of Thieves море воров"><div class="game-card__icon">🏴‍☠️</div><div class="game-card__info"><h3 class="game-card__title">Sea of Thieves</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Valheim вальхейм"><div class="game-card__icon">🛡️</div><div class="game-card__info"><h3 class="game-card__title">Valheim</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Don't Starve Together донт старв"><div class="game-card__icon">🔥</div><div class="game-card__info"><h3 class="game-card__title">Don't Starve Together</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Stardew Valley стардью"><div class="game-card__icon">🌾</div><div class="game-card__info"><h3 class="game-card__title">Stardew Valley</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="The Sims 4 симс"><div class="game-card__icon">🏠</div><div class="game-card__info"><h3 class="game-card__title">The Sims 4</h3><div class="game-card__tags"><span class="tag tag--standart">Стандарт</span></div></div></div>
+          <div class="game-card" data-title="Cities Skylines 2 ситис"><div class="game-card__icon">🏙️</div><div class="game-card__info"><h3 class="game-card__title">Cities: Skylines II</h3><div class="game-card__tags"><span class="tag tag--vip">VIP</span></div></div></div>
+          <div class="game-card" data-title="The Outlast Trials зе аутласт трайалс"><div class="game-card__icon">🔪</div><div class="game-card__info"><h3 class="game-card__title">The Outlast Trials</h3><div class="game-card__tags"><span class="tag tag--vip">Стандарт</span></div></div></div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- тот же footer -->
-  <!-- те же скрипты -->
+  <!-- БЛОК 4: ПОДВАЛ -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__info">
+        <a href="index.html" class="logo footer__logo">РЕСПАУН</a>
+        <p class="footer__address">г. Москва, ул. Студенческая, д. 15<br>(в 2 минутах от главного корпуса)</p>
+      </div>
+      
+      <div class="footer__nav">
+        <h3 class="footer__title">Меню</h3>
+        <ul class="footer__list">
+          <li><a href="zones.html" class="footer__link">Зоны</a></li>
+          <li><a href="prices.html" class="footer__link">Цены</a></li>
+          <li><a href="games.html" class="footer__link">Игры</a></li>
+          <li><a href="tournament.html" class="footer__link">Турниры</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contacts">
+        <h3 class="footer__title">Контакты</h3>
+        <div class="footer__socials" data-event="social_click">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        </div>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+      </div>
+    </div>
+    
+    <div class="container footer__bottom">
+      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
+    </div>
+  </footer>
+
 </body>
 </html>
