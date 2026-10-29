@@ -59,8 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ticketPrice.textContent = `${total} ₽`;
   }
 
-  // === ОТПРАВКА СОБЫТИЯ generate_lead ===
-  // Отправляем только если в URL есть параметры (значит, человек пришел с формы)
+    // === ОТПРАВКА СОБЫТИЯ generate_lead ===
   if (zone || type) {
     let leadType = 'booking';
     if (type === 'tournament') {
@@ -70,11 +69,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const leadZone = zone || 'unknown';
     const leadTotal = total || 0;
 
-    if (typeof window.sendGenerateLead === 'function') {
-      window.sendGenerateLead(leadType, leadZone, leadTotal);
-      console.log(`[Thanks] generate_lead отправлен (Тип: ${leadType}, Зона: ${leadZone}, Сумма: ${leadTotal})`);
-    } else {
-      console.error('[Thanks] Функция sendGenerateLead не найдена!');
+    // Функция, которая будет пытаться отправить событие
+    const trySendLead = () => {
+      if (typeof window.sendGenerateLead === 'function') {
+        window.sendGenerateLead(leadType, leadZone, leadTotal);
+        console.log(`[Thanks] generate_lead УСПЕШНО отправлен (Тип: ${leadType}, Зона: ${leadZone}, Сумма: ${leadTotal})`);
+        return true; // Успех
+      }
+      return false; // Еще не загрузилось
+    };
+
+    // Если функция уже есть, отправляем сразу
+    if (!trySendLead()) {
+      // Если нет — делаем 5 попыток с интервалом в 200мс
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (trySendLead() || attempts >= 5) {
+          clearInterval(interval);
+          if (attempts >= 5) {
+            console.error('[Thanks] Не удалось найти sendGenerateLead после 5 попыток. Проверь analytics.js');
+          }
+        }
+      }, 200);
     }
   } else {
     console.log('[Thanks] Страница открыта напрямую, событие не отправлено.');
