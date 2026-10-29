@@ -60,11 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // === ОТПРАВКА СОБЫТИЯ generate_lead ===
-  // Проверяем, не отправляли ли мы уже это событие в текущей сессии
-  if (!sessionStorage.getItem('lead_sent')) {
-    
-    // Определяем тип лида для GA4
-    let leadType = 'booking'; // По умолчанию (для калькулятора и пакетов)
+  // Отправляем только если в URL есть параметры (значит, человек пришел с формы)
+  if (zone || type) {
+    let leadType = 'booking';
     if (type === 'tournament') {
       leadType = 'tournament';
     }
@@ -74,14 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (typeof window.sendGenerateLead === 'function') {
       window.sendGenerateLead(leadType, leadZone, leadTotal);
-      console.log(`[Thanks] Событие generate_lead отправлено (Тип: ${leadType}, Зона: ${leadZone}, Сумма: ${leadTotal})`);
-      
-      // Запоминаем, что лид уже отправлен, чтобы не дублировать при обновлении страницы
-      sessionStorage.setItem('lead_sent', 'true');
+      console.log(`[Thanks] generate_lead отправлен (Тип: ${leadType}, Зона: ${leadZone}, Сумма: ${leadTotal})`);
     } else {
       console.error('[Thanks] Функция sendGenerateLead не найдена!');
     }
   } else {
-    console.log('[Thanks] Событие generate_lead уже было отправлено ранее');
+    console.log('[Thanks] Страница открыта напрямую, событие не отправлено.');
   }
 });
