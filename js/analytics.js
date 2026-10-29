@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   
+  // ВКЛЮЧАЕМ РЕЖИМ ОТЛАДКИ ДЛЯ DEBUGVIEW (Не забудь убрать перед сдачей!)
+  if (typeof gtag === 'function') {
+    gtag('config', 'G-FVSBR67M78', { 'debug_mode': true });
+  }
+
   // Вспомогательная функция для безопасной отправки события
   function sendEvent(eventName, params = {}) {
     if (typeof gtag === 'function') {
@@ -47,9 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
 
   // Событие 7: generate_lead (Ключевое)
-  // Отправляется ТОЛЬКО после успешного ответа сервера (ok: true)
-  // Вызывается из формы (forms.js), поэтому мы экспортируем функцию наружу
-  // Событие 7: generate_lead
   window.sendGenerateLead = function(leadType, leadZone, value) {
     sendEvent('generate_lead', {
       lead_type: leadType,
@@ -119,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-    // =========================================================================
+  // =========================================================================
   // СОБЫТИЕ 13: tournament_view (Просмотр турнира)
   // =========================================================================
   const tournamentLinks = document.querySelectorAll('a[href*="tournament.html"]');
