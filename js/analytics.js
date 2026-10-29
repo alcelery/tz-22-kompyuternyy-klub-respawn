@@ -119,4 +119,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+    // =========================================================================
+  // СОБЫТИЕ 13: tournament_view (Просмотр турнира)
+  // =========================================================================
+  const tournamentLinks = document.querySelectorAll('a[href*="tournament.html"]');
+  tournamentLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      sendEvent('tournament_view', {
+        tournament_id: 'winter_cup_2026' // ID турнира
+      });
+    });
+  });
+
+  // =========================================================================
+  // СОБЫТИЕ 20: video_play (Запуск видео)
+  // =========================================================================
+  const clubVideo = document.getElementById('clubVideo');
+  if (clubVideo) {
+    let videoStarted = false; // Флаг, чтобы не отправлять событие при паузе/возобновлении
+    clubVideo.addEventListener('play', () => {
+      if (!videoStarted) {
+        sendEvent('video_play', {
+          video_title: 'Атмосфера клуба' // Название видео
+        });
+        videoStarted = true;
+      }
+    });
+  }
+
 });
