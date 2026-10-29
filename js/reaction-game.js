@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Начало попытки
   startBtn.addEventListener('click', (e) => {
-    // ВАЖНО: Останавливаем всплытие события, чтобы клик по кнопке 
-    // не засчитывался как клик по игровому полю
     e.stopPropagation(); 
     
     if (attempts >= maxAttempts) {
@@ -31,11 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Клик по игровому полю
   testArea.addEventListener('click', () => {
-    // Если мы не ждем и не зеленый - игнорируем
     if (!isWaiting && !isGreen) return;
 
     if (isWaiting) {
-      // Клик слишком рано (пока красный)
       clearTimeout(timeoutId);
       isWaiting = false;
       testArea.style.backgroundColor = '#e53935';
@@ -47,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isGreen) {
-      // Успешный клик
       const reactionTime = Date.now() - startTime;
       isGreen = false;
       isWaiting = false;
@@ -74,32 +69,29 @@ document.addEventListener('DOMContentLoaded', () => {
   function startAttempt() {
     startBtn.style.display = 'none';
     
-    // Сначала сбрасываем цвета в нейтральный
     testArea.style.backgroundColor = 'var(--surface-color)';
     testTitle.textContent = 'Приготовьтесь...';
     testDesc.textContent = 'Ждите зеленого цвета';
     lastResultDisplay.textContent = '';
     
-    isWaiting = false; // Пока не ждем
+    isWaiting = false; 
     isGreen = false;
 
-    // Небольшая задержка перед тем, как загорится красный (чтобы UI успел обновиться)
     setTimeout(() => {
-      testArea.style.backgroundColor = '#e53935'; // Красный
+      testArea.style.backgroundColor = '#e53935'; 
       isWaiting = true;
 
-      // Случайная задержка от 1.5 до 5 секунд до зеленого
       const delay = Math.floor(Math.random() * 3500) + 1500;
 
       timeoutId = setTimeout(() => {
         isWaiting = false;
         isGreen = true;
-        testArea.style.backgroundColor = '#00e676'; // Зеленый
+        testArea.style.backgroundColor = '#00e676'; 
         testTitle.textContent = 'ЖМИ!';
         testDesc.textContent = '';
         startTime = Date.now();
       }, delay);
-    }, 100); // 100 мс задержка
+    }, 100); 
   }
 
   function updateTable(attemptNum, time) {
@@ -124,6 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
     testDesc.textContent = `Твоя средняя реакция: ${avg} мс. Промокод ждет тебя ниже!`;
     startBtn.textContent = 'Пройти заново';
     startBtn.style.display = 'inline-flex';
+
+    // === ОТПРАВКА СОБЫТИЯ В GA4 ===
+    if (typeof window.sendReactionComplete === 'function') {
+      window.sendReactionComplete(avg);
+    }
   }
 
   function resetGame() {

@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let total = pricePerHour * seats * hours;
     let isDiscount = false;
+    let timeBand = 'day'; // Для аналитики (по умолчанию)
 
     const selectedDate = new Date(dateInput.value);
     const dayOfWeek = selectedDate.getDay(); // 0 - Вс, 1 - Пн...
@@ -38,6 +39,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const startTimeInMinutes = startHour * 60 + startMinute;
     const discountEnd = 14 * 60; // 14:00
     const discountStart = 8 * 60; // 08:00
+
+    // Определяем time_band для аналитики
+    if (startHour >= 23 || startHour < 8) {
+      timeBand = 'night';
+    } else if (dayOfWeek === 0 || dayOfWeek === 6) {
+      timeBand = 'weekend';
+    } else if (startTimeInMinutes >= discountStart && startTimeInMinutes < discountEnd) {
+      timeBand = 'weekday_day';
+    } else {
+      timeBand = 'weekday_evening';
+    }
 
     // Скидка: будни (1-5) и время с 08:00 до 14:00
     if (dayOfWeek >= 1 && dayOfWeek <= 5 && startTimeInMinutes >= discountStart && startTimeInMinutes < discountEnd) {
@@ -55,6 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
       discountMsg.style.display = 'block';
     } else {
       discountMsg.style.display = 'none';
+    }
+
+    // === ОТПРАВКА СОБЫТИЯ В GA4 ===
+    if (typeof window.sendBookingCalc === 'function') {
+      window.sendBookingCalc(zoneSelect.value, seats, hours, timeBand, total);
     }
   }
 

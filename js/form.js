@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bookingForm = document.getElementById('bookingForm');
   if (!bookingForm) return;
 
-  // Получаем параметры из URL (например, ?zone=vip&date=2025-05-20&time=10:00&seats=2&hours=3&total=1470)
+  // Получаем параметры из URL
   const urlParams = new URLSearchParams(window.location.search);
 
   // Проверяем, есть ли параметры
@@ -38,14 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (totalDisplay && totalPrice) {
         totalPrice.textContent = `${total} ₽`;
-        totalDisplay.style.display = 'flex'; // Показываем блок
+        totalDisplay.style.display = 'flex'; 
       }
       
-      // Записываем в скрытое поле для отправки на сервер/в thanks.html
       if (hiddenTotal) hiddenTotal.value = total;
     }
   } else {
-    // Если параметров нет (зашли напрямую), ставим сегодняшнюю дату
     const today = new Date().toISOString().split('T')[0];
     const dateInput = document.getElementById('bookDate');
     if (dateInput) {
@@ -53,4 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
       dateInput.value = today;
     }
   }
+
+  // === ОТПРАВКА ФОРМЫ И СОБЫТИЕ generate_lead ===
+  bookingForm.addEventListener('submit', (e) => {
+    // Поскольку форма отправляется методом GET на thanks.html, 
+    // мы перехватываем отправку, шлем событие и переходим.
+    // (Если в будущем будете делать отправку через fetch, логика та же).
+    
+    const zone = document.getElementById('bookZone').value;
+    const total = document.getElementById('paramTotal').value || 0;
+
+    // Отправляем событие generate_lead
+    if (typeof window.sendGenerateLead === 'function') {
+      window.sendGenerateLead('booking', zone, total);
+    }
+
+    // Даем аналитике долю секунды, чтобы отправить запрос, и переходим
+    // (Обычно gtag успевает отправить событие через beacon transport)
+  });
 });
