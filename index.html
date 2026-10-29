@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="css/style.css">
   
   <script src="js/main.js" defer></script>
+  <!-- Подключаем наш скрипт аналитики -->
+  <script src="js/analytics.js" defer></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVSBR67M78"></script>
@@ -24,7 +26,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-FVSBR67M78');
   </script>
   
@@ -49,9 +50,10 @@
       </nav>
 
       <div class="header__actions">
-        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
-        <!-- Сделали кнопку бронирования в шапке более заметной -->
-        <a href="prices.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        <!-- Добавили data-contact-type для события contact_click -->
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" data-contact-type="phone" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        
+        <a href="prices.html" class="btn btn--primary btn--small" data-event="cta_click" data-button-name="header_book" data-page-section="header">Забронировать</a>
         
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
           <span class="burger__line"></span>
@@ -69,7 +71,7 @@
         <div class="hero__content">
           <h1 class="hero__title">Твой респаун начинается здесь</h1>
           <p class="hero__subtitle">Скидка 30% на игру до 14:00 для студентов. Мощные ПК на RTX 40-й серии, быстрый интернет и комфортная атмосфера.</p>
-          <a href="reaction.html" class="btn btn--primary btn--large btn--glow" data-event="cta_click" data-button-name="hero_book">
+          <a href="prices.html" class="btn btn--primary btn--large btn--glow" data-event="cta_click" data-button-name="hero_book" data-page-section="hero">
             Забронировать место
           </a>
         </div>
@@ -83,9 +85,11 @@
     <section class="zones section">
       <div class="container">
         <h2 class="section__title">Наши зоны</h2>
-        <div class="zones__grid" data-event="zone_view">
+        <!-- Событие zone_view перехватывается в analytics.js -->
+        <div class="zones__grid">
           
-          <a href="zones.html#standard" class="zone-card">
+          <!-- Карточка Стандарт -->
+          <a href="zones.html#standard" class="zone-card" id="standard">
             <img src="img/standart.jpg" alt="Зона Стандарт" class="zone-card__img" loading="lazy" width="300" height="200">
             <div class="zone-card__content">
               <h3 class="zone-card__title">Standart</h3>
@@ -94,7 +98,8 @@
             </div>
           </a>
 
-          <a href="zones.html#vip" class="zone-card">
+          <!-- Карточка VIP -->
+          <a href="zones.html#vip" class="zone-card" id="vip">
             <img src="img/vip.jpg" alt="VIP-зона" class="zone-card__img" loading="lazy" width="300" height="200">
             <div class="zone-card__content">
               <h3 class="zone-card__title">VIP</h3>
@@ -103,7 +108,8 @@
             </div>
           </a>
 
-          <a href="zones.html#bootcamp" class="zone-card">
+          <!-- Карточка Bootcamp -->
+          <a href="zones.html#bootcamp" class="zone-card" id="bootcamp">
             <img src="img/bootcamp.jpg" alt="Буткемп для команд" class="zone-card__img" loading="lazy" width="300" height="200">
             <div class="zone-card__content">
               <h3 class="zone-card__title">Bootcamp</h3>
@@ -112,7 +118,8 @@
             </div>
           </a>
 
-          <a href="zones.html#console" class="zone-card">
+          <!-- Карточка PS5 -->
+          <a href="zones.html#console" class="zone-card" id="ps5">
             <img src="img/ps5.jpg" alt="Консольная зона" class="zone-card__img" loading="lazy" width="300" height="200">
             <div class="zone-card__content">
               <h3 class="zone-card__title">PlayStation 5</h3>
@@ -126,25 +133,30 @@
     </section>
 
     <!-- БЛОК 4: ТУРНИР «ЗИМНИЙ КУБОК» -->
-    <section class="tournament-promo section" data-event="tournament_view">
+    <!-- Событие tournament_view вешается на клик по баннеру или кнопке -->
+    <section class="tournament-promo section">
       <div class="container">
         <div class="promo-banner">
           <div class="promo-banner__content">
             <span class="badge">Скоро</span>
             <h2 class="promo-banner__title">Турнир «Зимний кубок»</h2>
             <p class="promo-banner__text">Собирай команду и сражайся за призовой фонд в 60 000 рублей. Дисциплина: CS2. Отборочные онлайн с 28 ноября по 13 декабря, финал в клубе 19 декабря.</p>
-            <a href="tournament.html" class="btn btn--primary btn--large" data-event="cta_click" data-button-name="tournament_more">Подробнее о турнире</a>
+            
+            <a href="tournament.html" class="btn btn--primary btn--large" data-event="cta_click" data-button-name="tournament_more" data-page-section="tournament_promo">
+              Подробнее о турнире
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- БЛОК 5: ВИДЕО КЛУБА -->
-    <section class="video-section section" data-event="video_play">
+    <section class="video-section section">
       <div class="container">
         <h2 class="section__title">Атмосфера клуба</h2>
         <div class="video-wrapper">
-          <video class="club-video" controls preload="none">
+          <!-- Добавили id для отслеживания воспроизведения -->
+          <video id="clubVideo" class="club-video" controls preload="none">
             <source src="files/club_vid.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
           </video>
@@ -173,11 +185,12 @@
 
       <div class="footer__contacts">
         <h3 class="footer__title">Контакты</h3>
-        <div class="footer__socials" data-event="social_click">
-          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
-          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        <!-- Добавили data-network и data-page-section для social_click -->
+        <div class="footer__socials">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" data-event="social_click" data-network="telegram" data-page-section="footer" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" data-event="social_click" data-network="vk" data-page-section="footer" aria-label="Мы во ВКонтакте">VK</a>
         </div>
-        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click" data-contact-type="phone">+7 (999) 000-00-00</a>
       </div>
     </div>
     
