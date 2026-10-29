@@ -1677,3 +1677,150 @@ ul {
     padding: 40px;
   }
 }
+
+/* =========================================
+   СТРАНИЦА РЕАКЦИИ
+   ========================================= */
+
+/* Игровое поле */
+.test-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.test-area {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  border: 2px solid rgba(255,255,255,0.05);
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  user-select: none;
+}
+
+.test-title {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.test-desc {
+  font-size: 18px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 24px;
+}
+
+.test-status {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.test-status strong {
+  color: var(--text-main);
+}
+
+/* Таблица результатов */
+.results-table-wrapper {
+  overflow-x: auto;
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.results-table th,
+.results-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.results-table th {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.results-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.results-table__average td {
+  font-weight: bold;
+  font-size: 18px;
+  background-color: rgba(0,0,0,0.2);
+}
+
+/* Блок промокода */
+.promo-box {
+  background: linear-gradient(135deg, rgba(26, 29, 36, 1) 0%, rgba(0, 230, 118, 0.1) 100%);
+  border: 2px dashed var(--accent-color);
+  border-radius: var(--border-radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+}
+
+.promo-box__title {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.promo-box__text {
+  color: var(--text-muted);
+  font-size: 16px;
+  max-width: 600px;
+}
+
+.promo-code-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: rgba(0,0,0,0.4);
+  padding: 8px 8px 8px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.promo-code {
+  font-family: monospace;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: var(--accent-color);
+}
+
+.promo-copied-msg {
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Адаптив */
+@media (min-width: 768px) {
+  .promo-box {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .promo-box__content {
+    flex: 1;
+  }
+}
