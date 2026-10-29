@@ -18,31 +18,36 @@ document.addEventListener('DOMContentLoaded', () => {
   dateInput.min = today;
   dateInput.value = today;
 
+  // Функция пересчета калькулятора
   function calculate() {
     const pricePerHour = parseInt(zoneSelect.options[zoneSelect.selectedIndex].dataset.price);
     const seats = parseInt(seatsInput.value) || 1;
     const hours = parseInt(hoursInput.value) || 1;
     const time = timeInput.value;
     
-    if (!time) return;
+    if (!time) return; // Если время не выбрано, не считаем
 
     let total = pricePerHour * seats * hours;
     let isDiscount = false;
 
     const selectedDate = new Date(dateInput.value);
-    const dayOfWeek = selectedDate.getDay(); 
+    const dayOfWeek = selectedDate.getDay(); // 0 - Вс, 1 - Пн...
     
+    // Парсим время
     const [startHour, startMinute] = time.split(':').map(Number);
     const startTimeInMinutes = startHour * 60 + startMinute;
-    const discountEnd = 14 * 60;
-    const discountStart = 8 * 60;
+    const discountEnd = 14 * 60; // 14:00
+    const discountStart = 8 * 60; // 08:00
 
+    // Скидка: будни (1-5) и время с 08:00 до 14:00
     if (dayOfWeek >= 1 && dayOfWeek <= 5 && startTimeInMinutes >= discountStart && startTimeInMinutes < discountEnd) {
-      total = total * 0.7;
+      total = total * 0.7; // -30%
       isDiscount = true;
     }
 
     total = Math.round(total);
+    
+    // Выводим результат
     totalPriceEl.textContent = `${total} ₽`;
     btnTotalPriceEl.textContent = `${total}`;
     
@@ -53,35 +58,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Слушаем изменения в полях
   [zoneSelect, dateInput, timeInput, seatsInput, hoursInput].forEach(el => {
     el.addEventListener('input', calculate);
     el.addEventListener('change', calculate);
   });
 
-  // === КНОПКА ПОД КАЛЬКУЛЯТОРОМ ===
-  // Теперь ведет на thanks.html с параметрами
+  // Кнопка ПОД КАЛЬКУЛЯТОРОМ (ведет на thanks.html)
   submitBtn.addEventListener('click', () => {
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
 
-    // Собираем данные
-    const zone = zoneSelect.value;
-    const date = dateInput.value;
-    const time = timeInput.value;
-    const seats = seatsInput.value;
-    const hours = hoursInput.value;
-    const total = btnTotalPriceEl.textContent;
-
-    // Формируем URL для thanks.html
     const params = new URLSearchParams({
-      zone: zone,
-      date: date,
-      time: time,
-      seats: seats,
-      hours: hours,
-      total: total
+      zone: zoneSelect.value,
+      date: dateInput.value,
+      time: timeInput.value,
+      seats: seatsInput.value,
+      hours: hoursInput.value,
+      total: btnTotalPriceEl.textContent
     });
 
     window.location.href = `thanks.html?${params.toString()}`;
@@ -92,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const packageButtons = document.querySelectorAll('.btn-select-package');
   
   packageButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       // Получаем данные из data-атрибутов кнопки
       const zoneValue = btn.dataset.zone;
       const hoursValue = btn.dataset.hours;
@@ -105,17 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const currentMinutes = String(now.getMinutes()).padStart(2, '0');
       const currentTime = `${currentHours}:${currentMinutes}`;
 
-      // Формируем URL для thanks.html с данными пакета
+      // Собираем URL и сразу перекидываем на thanks.html
       const params = new URLSearchParams({
         zone: zoneValue,
         date: currentDate,
         time: currentTime,
-        seats: 1, // Пакеты обычно на 1 человека
+        seats: 1, // Пакеты обычно на 1 место
         hours: hoursValue,
         total: fixedPrice
       });
 
-      // Перенаправляем сразу на страницу спасибо
       window.location.href = `thanks.html?${params.toString()}`;
     });
   });

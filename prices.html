@@ -27,9 +27,9 @@
       
       <nav class="nav" id="nav" aria-label="Главное меню">
         <ul class="nav__list">
-          <li class="nav__item"><a href="index.html" class="nav__link nav__link--active" aria-current="page">Главная</a></li>
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
           <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
-          <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
+          <li class="nav__item"><a href="prices.html" class="nav__link nav__link--active" aria-current="page">Цены</a></li>
           <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
           <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
           <li class="nav__item"><a href="reaction.html" class="nav__link">Реакция</a></li>
@@ -39,8 +39,7 @@
 
       <div class="header__actions">
         <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
-        <!-- Сделали кнопку бронирования в шапке более заметной -->
-        <a href="prices.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click" data-button-name="header_book">Забронировать</a>
         
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
           <span class="burger__line"></span>
@@ -60,12 +59,12 @@
         </nav>
         <div class="page-header__content">
           <h1 class="page-title">Цены и тарифы</h1>
-          <p class="page-subtitle">Прозрачное ценообразование без скрытых платежей. Студентам скидка 30% до 14:00, а для ночных марафонов у нас есть специальные пакеты.</p>
+          <p class="page-subtitle">Прозрачное ценообразование без скрытых платежей. Скидка 30% на игру до 14:00 по будням, а для ночных марафонов у нас есть специальные пакеты.</p>
         </div>
       </div>
     </section>
 
-    <!-- БЛОК 2: КАЛЬКУЛЯТОР (СОГЛАСНО СХЕМЕ - ПЕРВЫЙ) -->
+    <!-- БЛОК 2: КАЛЬКУЛЯТОР -->
     <section class="calculator-section section" data-event="booking_calc">
       <div class="container">
         <div class="calc-wrapper">
@@ -80,9 +79,10 @@
             <div class="form-group">
               <label for="calcZone" class="form-label">Зона</label>
               <select id="calcZone" class="form-control" required>
-                <option value="standard" data-price="200">Стандарт (200 ₽/час)</option>
-                <option value="vip" data-price="350">VIP (350 ₽/час)</option>
-                <option value="console" data-price="250">Консоли (250 ₽/час)</option>
+                <option value="standard" data-price="150">Стандарт (150 ₽/час)</option>
+                <option value="vip" data-price="250">VIP (250 ₽/час)</option>
+                <option value="bootcamp" data-price="1100">Bootcamp (1100 ₽/час)</option>
+                <option value="ps5" data-price="400">PlayStation 5 (400 ₽/час)</option>
               </select>
             </div>
 
@@ -114,89 +114,85 @@
                 <span id="calcTotalPrice" class="calc-result__price">0 ₽</span>
               </div>
               <div class="calc-result__discount" id="calcDiscountMsg" style="display: none;">
-                🎉 Применена студенческая скидка 30%!
+                🎉 Применена дневная скидка 30%!
               </div>
             </div>
 
-            <button type="button" class="btn btn--primary btn--large btn--glow btn--full-width" id="calcSubmitBtn" data-event="cta_click">
+            <button type="button" class="btn btn--primary btn--large btn--glow btn--full-width" id="calcSubmitBtn" data-event="cta_click" data-button-name="calc_book">
               Забронировать за <span id="btnTotalPrice">0</span> ₽
             </button>
-            <input type="hidden" id="calcHiddenParams" name="calcParams" value="">
           </form>
 
         </div>
       </div>
     </section>
 
-    <!-- БЛОК 3: ПАКЕТЫ (СОГЛАСНО СХЕМЕ - ВТОРОЙ) -->
+    <!-- БЛОК 3: ПАКЕТЫ -->
     <section class="packages-section section" data-event="package_select">
       <div class="container">
         <h2 class="section__title">Выгодные пакеты</h2>
-        <p class="section__subtitle" style="color: var(--text-muted); margin-bottom: 32px;">Экономьте время и деньги. Выберите готовый пакет, и мы автоматически подставим его параметры в калькулятор.</p>
+        <p class="section__subtitle" style="color: var(--text-muted); margin-bottom: 32px;">Скидки и пакеты не суммируются. Выбери готовый пакет, и мы сразу перекинем тебя на страницу бронирования с нужными параметрами.</p>
         
         <div class="pricing-cards">
           
-          <!-- Пакет "Учеба" (3 часа) -->
+          <!-- Пакет "3 часа" -->
           <div class="pricing-card">
-            <h3 class="pricing-card__title">Студенческий</h3>
+            <h3 class="pricing-card__title">Пакет «3 часа»</h3>
             <div class="pricing-card__price">
-              <span class="pricing-card__amount">450 ₽</span>
-              <span class="pricing-card__period">/ 3 часа</span>
+              <span class="pricing-card__amount">400 ₽</span>
+              <span class="pricing-card__period">/ Стандарт</span>
             </div>
             <ul class="pricing-card__features">
               <li>Зона Стандарт</li>
-              <li>Действует с 08:00 до 16:00</li>
-              <li>Скидка 30% включена</li>
+              <li>Фиксированная цена</li>
               <li>Идеально между парами</li>
             </ul>
-            <!-- data-атрибуты для кнопки "Выбрать" -->
-            <button class="btn btn--outline btn--full-width btn-select-package" 
+            <!-- data-zone, data-hours и data-price нужны для JS -->
+            <button type="button" class="btn btn--outline btn--full-width btn-select-package" 
                     data-zone="standard" 
                     data-hours="3" 
-                    data-price="450">
+                    data-price="400">
               Выбрать
             </button>
           </div>
 
-          <!-- Пакет "Вечерний" (5 часов) -->
+          <!-- Пакет "3 часа VIP" -->
           <div class="pricing-card pricing-card--popular">
-            <div class="pricing-card__badge">Хит продаж</div>
-            <h3 class="pricing-card__title">Вечерний</h3>
+            <div class="pricing-card__badge">Выгодно</div>
+            <h3 class="pricing-card__title">Пакет «3 часа» VIP</h3>
             <div class="pricing-card__price">
-              <span class="pricing-card__amount">800 ₽</span>
-              <span class="pricing-card__period">/ 5 часов</span>
-            </div>
-            <ul class="pricing-card__features">
-              <li>Зона Стандарт</li>
-              <li>Действует с 16:00 до 23:00</li>
-              <li>Фиксированная цена</li>
-              <li>Идеально для катки с друзьями</li>
-            </ul>
-            <button class="btn btn--primary btn--full-width btn-select-package" 
-                    data-zone="standard" 
-                    data-hours="5" 
-                    data-price="800">
-              Выбрать
-            </button>
-          </div>
-
-          <!-- Пакет "Ночной" -->
-          <div class="pricing-card">
-            <h3 class="pricing-card__title">Ночной марафон</h3>
-            <div class="pricing-card__price">
-              <span class="pricing-card__amount">1000 ₽</span>
-              <span class="pricing-card__period">/ с 23:00 до 08:00</span>
+              <span class="pricing-card__amount">650 ₽</span>
+              <span class="pricing-card__period">/ VIP</span>
             </div>
             <ul class="pricing-card__features">
               <li>Зона VIP</li>
-              <li>Фиксированная цена за 9 часов</li>
-              <li>Кофе и чай включены</li>
-              <li>Действует ежедневно</li>
+              <li>Фиксированная цена</li>
+              <li>Топовое железо</li>
             </ul>
-            <button class="btn btn--outline btn--full-width btn-select-package" 
+            <button type="button" class="btn btn--primary btn--full-width btn-select-package" 
                     data-zone="vip" 
+                    data-hours="3" 
+                    data-price="650">
+              Выбрать
+            </button>
+          </div>
+
+          <!-- Ночной пакет -->
+          <div class="pricing-card">
+            <h3 class="pricing-card__title">Ночь (23:00–08:00)</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">700 ₽</span>
+              <span class="pricing-card__period">/ Стандарт</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li>Зона Стандарт</li>
+              <li>Фиксированная цена за 9 часов</li>
+              <li>VIP-зона: 1100 ₽</li>
+            </ul>
+            <button type="button" class="btn btn--outline btn--full-width btn-select-package" 
+                    data-zone="standard" 
                     data-hours="9" 
-                    data-price="1000">
+                    data-price="700">
               Выбрать
             </button>
           </div>
@@ -205,18 +201,17 @@
       </div>
     </section>
 
-    <!-- БЛОК 4: ПРАВИЛА КЛУБА PDF (СОГЛАСНО СХЕМЕ - ТРЕТИЙ) -->
+    <!-- БЛОК 4: ПРАВИЛА КЛУБА PDF -->
     <section class="rules-section section" data-event="file_download">
       <div class="container">
         <div class="rules-box">
           <div class="rules-box__content">
             <h2 class="rules-box__title">Правила клуба</h2>
-            <p class="rules-box__text">Ознакомьтесь с правилами посещения компьютерного клуба «РЕСПАУН». Здесь описаны нормы поведения, правила бронирования и техника безопасности.</p>
+            <p class="rules-box__text">Ознакомьтесь с правилами посещения компьютерного клуба «РЕСПАУН». Обратите внимание: вход с 14 лет. С 22:00 до 08:00 и на ночные пакеты — только с 18 лет.</p>
           </div>
           <div class="rules-box__action">
-            <!-- Ссылка на PDF документ. Обязательно скачается при клике -->
             <a href="docs/rules.pdf" download class="btn btn--primary btn--large">
-              Скачать PDF (1.2 МБ)
+              Скачать PDF
             </a>
           </div>
         </div>
@@ -253,7 +248,7 @@
     </div>
     
     <div class="container footer__bottom">
-      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <p>&copy; 2026 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
       <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
     </div>
   </footer>

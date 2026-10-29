@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO -->
-  <title>Турниры | Компьютерный клуб РЕСПАУН</title>
-  <meta name="description" content="Турниры по CS2 и Dota 2 в компьютерном клубе РЕСПАУН. Регистрация на «Зимний кубок» по CS2. Регламент, даты и призовой фонд.">
+  <title>Турнир «Зимний кубок» по CS2 | Компьютерный клуб РЕСПАУН</title>
+  <meta name="description" content="Регистрация на турнир «Зимний кубок» по CS2. Отборочные 28 ноября – 13 декабря, финал 19 декабря в клубе РЕСПАУН. Призовой фонд 60 000 ₽.">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Турниры в клубе РЕСПАУН">
-  <meta property="og:description" content="Участвуй в турнирах по CS2 и Dota 2. Регистрируй команду на «Зимний кубок».">
+  <meta property="og:title" content="Турнир «Зимний кубок» по CS2 | РЕСПАУН">
+  <meta property="og:description" content="Собирай команду 5х5. Призовой фонд 60 000 ₽. Финал 19 декабря.">
   <meta property="og:image" content="img/bolvanka.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://respawn-club.ru/tournament.html">
@@ -18,7 +18,6 @@
   <link rel="icon" href="img/bolvanka.jpg" type="image/jpeg">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
-  <!-- Скрипт для модального окна -->
   <script src="js/tournament.js" defer></script>
 </head>
 <body class="page-tournament">
@@ -30,11 +29,11 @@
       
       <nav class="nav" id="nav" aria-label="Главное меню">
         <ul class="nav__list">
-          <li class="nav__item"><a href="index.html" class="nav__link nav__link--active" aria-current="page">Главная</a></li>
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
           <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
           <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
           <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
-          <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
+          <li class="nav__item"><a href="tournament.html" class="nav__link nav__link--active" aria-current="page">Турниры</a></li>
           <li class="nav__item"><a href="reaction.html" class="nav__link">Реакция</a></li>
           <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
         </ul>
@@ -42,8 +41,7 @@
 
       <div class="header__actions">
         <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
-        <!-- Сделали кнопку бронирования в шапке более заметной -->
-        <a href="prices.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click" data-button-name="header_book">Забронировать</a>
         
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
           <span class="burger__line"></span>
@@ -77,24 +75,28 @@
           <div class="tournament-card">
             <div class="tournament-card__badge">Регистрация открыта</div>
             <h2 class="tournament-card__title">Зимний кубок по CS2</h2>
-            <p class="tournament-card__desc">Главное событие этой зимы. Собирай команду из 5 человек и сражайся за призовой фонд в 50 000 рублей.</p>
+            <p class="tournament-card__desc">Собирай команду из 5 человек и сражайся за призовой фонд. Отборочные пройдут онлайн, а финал — в нашем клубе!</p>
             
             <ul class="tournament-details">
               <li class="tournament-details__item">
-                <span class="tournament-details__label">Дата финала:</span>
-                <span class="tournament-details__value">19 декабря 2026</span>
-              </li>
-              <li class="tournament-details__item">
                 <span class="tournament-details__label">Дисциплина:</span>
-                <span class="tournament-details__value">Counter-Strike 2</span>
+                <span class="tournament-details__value">CS2, 5 × 5</span>
               </li>
               <li class="tournament-details__item">
-                <span class="tournament-details__label">Формат:</span>
-                <span class="tournament-details__value">5v5, Single Elimination (до 1 поражения)</span>
+                <span class="tournament-details__label">Отборочные:</span>
+                <span class="tournament-details__value">28 ноября – 13 декабря (онлайн)</span>
+              </li>
+              <li class="tournament-details__item">
+                <span class="tournament-details__label">Финал:</span>
+                <span class="tournament-details__value">19 декабря (в клубе)</span>
               </li>
               <li class="tournament-details__item">
                 <span class="tournament-details__label">Взнос:</span>
-                <span class="tournament-details__value">1 000 ₽ с команды</span>
+                <span class="tournament-details__value">2 500 ₽ с команды</span>
+              </li>
+              <li class="tournament-details__item">
+                <span class="tournament-details__label">Призовой фонд:</span>
+                <span class="tournament-details__value" style="color: var(--accent-secondary);">60 000 ₽</span>
               </li>
             </ul>
           </div>
@@ -122,11 +124,11 @@
         <div class="rules-box">
           <div class="rules-box__content">
             <h2 class="rules-box__title">Регламент турнира</h2>
-            <p class="rules-box__text">Скачайте полный PDF-файл с правилами «Зимнего кубка». В нем описаны настройки серверов, правила дисквалификации и порядок проведения матчей.</p>
+            <p class="rules-box__text">Скачайте полный PDF-файл с правилами «Зимнего кубка». В нем описаны настройки серверов, правила дисквалификации и порядок проведения матчей. Обратите внимание: участники должны быть старше 14 лет.</p>
           </div>
           <div class="rules-box__action">
             <!-- Кнопка скачивания PDF -->
-            <a href="docs/tournament-rules.pdf" download class="btn btn--primary btn--large">
+            <a href="docs/tournament-rules.pdf" download class="btn btn--primary btn--large" data-event="file_download">
               Скачать регламент (PDF)
             </a>
           </div>
@@ -139,10 +141,10 @@
       <div class="container">
         <div class="cta-box">
           <h2 class="cta-box__title">Готовы к бою?</h2>
-          <p class="cta-box__text">Заполните заявку на участие в турнире «Зимний кубок». Наш администратор свяжется с вами для подтверждения состава.</p>
+          <p class="cta-box__text">Заполни заявку на участие в турнире «Зимний кубок». Наш администратор свяжется с тобой для подтверждения состава.</p>
           
           <!-- Кнопка открывает модальное окно -->
-          <button type="button" class="btn btn--primary btn--large btn--glow" id="openRegisterModal">
+          <button type="button" class="btn btn--primary btn--large btn--glow" id="openRegisterModal" data-button-name="register_team">
             Зарегистрировать команду
           </button>
         </div>
@@ -157,9 +159,9 @@
       <h2 class="modal__title">Заявка на турнир</h2>
       <p class="modal__subtitle">Зимний кубок по CS2 (Финал: 19 декабря)</p>
 
-      <!-- Форма заявки. Отправляется на thanks.html -->
+      <!-- Форма заявки -->
       <form action="thanks.html" method="GET" class="modal-form">
-        <!-- Скрытое поле с типом заявки, как указано в схеме -->
+        <!-- Скрытые поля для аналитики -->
         <input type="hidden" name="type" value="tournament">
         <input type="hidden" name="tournament" value="Зимний кубок CS2">
 
@@ -226,7 +228,7 @@
     </div>
     
     <div class="container footer__bottom">
-      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <p>&copy; 2026 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
       <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
     </div>
   </footer>

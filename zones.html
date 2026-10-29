@@ -27,10 +27,10 @@
     <div class="container header__container">
       <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
       
-      <nav class="nav" id="nav" aria-label="Главное меню">
+            <nav class="nav" id="nav" aria-label="Главное меню">
         <ul class="nav__list">
-          <li class="nav__item"><a href="index.html" class="nav__link nav__link--active" aria-current="page">Главная</a></li>
-          <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+          <li class="nav__item"><a href="zones.html" class="nav__link nav__link--active" aria-current="page">Зоны</a></li>
           <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
           <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
           <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
@@ -69,7 +69,7 @@
       </div>
     </section>
 
-        <!-- БЛОК 2: КАРТОЧКИ ЗОН (с характеристиками и фото) -->
+        <!-- БЛОК 2: КАРТОЧКИ ЗОН -->
     <section class="zones-detail section">
       <div class="container" data-event="zone_view">
         
@@ -79,17 +79,16 @@
             <img src="img/bolvanka.jpg" alt="Зона Стандарт в клубе РЕСПАУН" loading="lazy" width="600" height="400">
           </div>
           <div class="zone-detail-card__content">
-            <h2 class="zone-detail-card__title">Стандарт</h2>
+            <h2 class="zone-detail-card__title">Standart</h2>
             <div class="zone-detail-card__desc">
-              <p>Отличный выбор для повседневных тренировок и катки с друзьями.</p>
-              <p>Сбалансированная сборка обеспечит стабильный FPS в популярных онлайн-играх без переплаты за топовое железо.</p>
+              <p>Отличный выбор для повседневных тренировок и катки с друзьями. Сбалансированная сборка обеспечит стабильный FPS в популярных онлайн-играх.</p>
+              <p>У нас 40 таких мест в зале. Приходи один или собирай пати!</p>
             </div>
             
             <ul class="specs-list">
-              <li class="specs-list__item"><span class="specs-list__label">Процессор:</span> <span class="specs-list__value">Intel Core i5-12400F</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Видеокарта:</span> <span class="specs-list__value">NVIDIA RTX 3060 (12GB)</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">ОЗУ:</span> <span class="specs-list__value">16GB DDR4 3200MHz</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Монитор:</span> <span class="specs-list__value">24" IPS, 144Hz, 1ms</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Видеокарта:</span> <span class="specs-list__value">RTX 4060</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Монитор:</span> <span class="specs-list__value">165 Гц</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Цена:</span> <span class="specs-list__value">150 ₽/час</span></li>
             </ul>
           </div>
         </article>
@@ -102,36 +101,14 @@
           <div class="zone-detail-card__content">
             <h2 class="zone-detail-card__title">VIP</h2>
             <div class="zone-detail-card__desc">
-              <p>Максимальная производительность для киберспортсменов и стримеров.</p>
-              <p>Топовое железо, изолированные места и мониторы с высокой частотой обновления позволяют играть на максимумах даже в тяжелые проекты.</p>
+              <p>Максимальная производительность для киберспортсменов и стримеров. Топовое железо и мониторы с высокой частотой обновления.</p>
+              <p>Всего 12 VIP-мест, кресла премиум-класса.</p>
             </div>
             
             <ul class="specs-list">
-              <li class="specs-list__item"><span class="specs-list__label">Процессор:</span> <span class="specs-list__value">Intel Core i7-13700K</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Видеокарта:</span> <span class="specs-list__value">NVIDIA RTX 4070 (12GB)</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">ОЗУ:</span> <span class="specs-list__value">32GB DDR5 6000MHz</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Монитор:</span> <span class="specs-list__value">27" Fast IPS, 240Hz, 0.5ms</span></li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- Консольная зона -->
-        <article class="zone-detail-card" id="console">
-          <div class="zone-detail-card__image">
-            <img src="img/bolvanka.jpg" alt="Консольная зона в клубе РЕСПАУН" loading="lazy" width="600" height="400">
-          </div>
-          <div class="zone-detail-card__content">
-            <h2 class="zone-detail-card__title">Консоли</h2>
-            <div class="zone-detail-card__desc">
-              <p>Уютный диван, большой OLED-телевизор и актуальные консоли последнего поколения.</p>
-              <p>Идеальное место, чтобы расслабиться после пар, поиграть в эксклюзивы Sony или устроить турнир по FIFA с друзьями.</p>
-            </div>
-            
-            <ul class="specs-list">
-              <li class="specs-list__item"><span class="specs-list__label">Консоли:</span> <span class="specs-list__value">PlayStation 5 / Xbox Series X</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Телевизор:</span> <span class="specs-list__value">LG OLED 55", 4K, 120Hz</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Аудио:</span> <span class="specs-list__value">Домашний кинотеатр 5.1</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Контроллеры:</span> <span class="specs-list__value">DualSense / Xbox Gamepad</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Видеокарта:</span> <span class="specs-list__value">RTX 4080</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Монитор:</span> <span class="specs-list__value">240 Гц</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Цена:</span> <span class="specs-list__value">250 ₽/час</span></li>
             </ul>
           </div>
         </article>
@@ -142,17 +119,35 @@
             <img src="img/bolvanka.jpg" alt="Буткемп для команд в клубе РЕСПАУН" loading="lazy" width="600" height="400">
           </div>
           <div class="zone-detail-card__content">
-            <h2 class="zone-detail-card__title">Буткемп</h2>
+            <h2 class="zone-detail-card__title">Bootcamp</h2>
             <div class="zone-detail-card__desc">
               <p>Полностью изолированная комната для полноценных тренировок киберспортивных команд.</p>
-              <p>Здесь ничего не будет отвлекать от отработки тактик: отдельная дверь, собственная маркерная доска и усиленные сборки ПК уровня VIP.</p>
+              <p>Здесь ничего не будет отвлекать от отработки тактик: отдельная дверь, собственная маркерная доска. Комната рассчитана на 5 человек.</p>
             </div>
             
             <ul class="specs-list">
-              <li class="specs-list__item"><span class="specs-list__label">ПК:</span> <span class="specs-list__value">5 сборок уровня VIP</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Изоляция:</span> <span class="specs-list__value">Отдельная комната</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Место тренера:</span> <span class="specs-list__value">ПК + монитор для просмотра</span></li>
-              <li class="specs-list__item"><span class="specs-list__label">Бонус:</span> <span class="specs-list__value">Кулер с водой и кофе-машина</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Количество мест:</span> <span class="specs-list__value">5</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Цена:</span> <span class="specs-list__value">1100 ₽/час за комнату</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- PlayStation 5 -->
+        <article class="zone-detail-card" id="console">
+          <div class="zone-detail-card__image">
+            <img src="img/bolvanka.jpg" alt="PlayStation 5 в клубе РЕСПАУН" loading="lazy" width="600" height="400">
+          </div>
+          <div class="zone-detail-card__content">
+            <h2 class="zone-detail-card__title">PlayStation 5</h2>
+            <div class="zone-detail-card__desc">
+              <p>Уютный диван, большой телевизор и актуальная консоль последнего поколения.</p>
+              <p>Идеальное место, чтобы расслабиться после пар, поиграть в эксклюзивы Sony или устроить турнир по FIFA с друзьями.</p>
+            </div>
+            
+            <ul class="specs-list">
+              <li class="specs-list__item"><span class="specs-list__label">Телевизор:</span> <span class="specs-list__value">65"</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Вместимость:</span> <span class="specs-list__value">До 4 игроков</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Цена:</span> <span class="specs-list__value">400 ₽/час</span></li>
             </ul>
           </div>
         </article>
@@ -204,7 +199,7 @@
     </div>
     
     <div class="container footer__bottom">
-      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <p>&copy; 2026 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
       <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
     </div>
   </footer>
