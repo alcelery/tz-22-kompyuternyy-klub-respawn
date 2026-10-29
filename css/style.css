@@ -1169,3 +1169,166 @@ ul {
     flex: 1;
   }
 }
+
+/* =========================================
+   БЛОК ПРАВИЛ (PDF)
+   ========================================= */
+.rules-box {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.rules-box__title {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.rules-box__text {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+@media (min-width: 768px) {
+  .rules-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+  }
+  
+  .rules-box__action {
+    flex-shrink: 0;
+  }
+}
+
+/* =========================================
+   СТРАНИЦА КОНТАКТОВ (БРОНИРОВАНИЕ)
+   ========================================= */
+
+/* Блок бронирования */
+.booking-wrapper {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.booking-title {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: var(--accent-color);
+}
+
+.booking-desc {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Блок с итоговой ценой */
+.booking-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 230, 118, 0.1);
+  border: 1px dashed var(--accent-color);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+
+.booking-total strong {
+  font-size: 24px;
+  color: var(--accent-color);
+}
+
+/* Блок мессенджеров */
+.messengers-box {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.messengers-box__title {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.messengers-box__text {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.messengers-box__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.messenger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18px;
+  padding: 16px 24px;
+}
+
+.messenger-icon {
+  font-size: 24px;
+}
+
+/* Адаптив */
+@media (min-width: 768px) {
+  .booking-wrapper {
+    flex-direction: row;
+    padding: 48px;
+    gap: 64px;
+  }
+
+  .booking-info {
+    flex: 1;
+  }
+
+  .booking-form {
+    flex: 1;
+  }
+
+  .messengers-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 48px;
+  }
+
+  .messengers-box__content {
+    flex: 1;
+    padding-right: 40px;
+  }
+
+  .messengers-box__buttons {
+    flex-direction: row;
+    flex-shrink: 0;
+  }
+
+  .messenger-btn {
+    min-width: 200px;
+  }
+}

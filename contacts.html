@@ -5,22 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO -->
-  <title>Контакты | Компьютерный клуб РЕСПАУН</title>
-  <meta name="description" content="Контакты компьютерного клуба РЕСПАУН. Адрес, телефон, схема проезда и форма обратной связи. Ждем вас рядом с вузами.">
+  <title>Контакты и бронирование | Компьютерный клуб РЕСПАУН</title>
+  <meta name="description" content="Забронируйте место в компьютерном клубе РЕСПАУН онлайн. Форма бронирования и быстрая связь через Telegram или WhatsApp.">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Контакты клуба РЕСПАУН">
-  <meta property="og:description" content="Как нас найти, телефон для связи и онлайн-форма.">
-  <!-- Заглушка для превью -->
+  <meta property="og:title" content="Контакты и бронирование клуба РЕСПАУН">
+  <meta property="og:description" content="Забронируйте место онлайн или напишите нам в мессенджеры.">
   <meta property="og:image" content="img/bolvanka.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://respawn-club.ru/contacts.html">
   
-  <!-- Favicon & Styles -->
   <link rel="icon" href="img/bolvanka.jpg" type="image/jpeg">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
-  <!-- Скрипт для валидации формы (создадим чуть позже) -->
+  <!-- Скрипт для работы формы и парсинга URL -->
   <script src="js/forms.js" defer></script>
 </head>
 <body class="page-contacts">
@@ -55,107 +53,134 @@
   </header>
 
   <main>
-    <!-- БЛОК 2: ШАПКА СТРАНИЦЫ -->
+    <!-- ШАПКА СТРАНИЦЫ -->
     <section class="page-header">
       <div class="container">
         <nav class="breadcrumbs" aria-label="Хлебные крошки">
           <a href="index.html">Главная</a> <span class="breadcrumbs__sep">/</span> <span aria-current="page">Контакты</span>
         </nav>
         <div class="page-header__content">
-          <h1 class="page-title">Контакты</h1>
-          <p class="page-subtitle">Мы находимся в шаговой доступности от главных корпусов вузов. Звоните, пишите или заходите в гости — мы всегда рады новым игрокам.</p>
+          <h1 class="page-title">Контакты и бронирование</h1>
+          <p class="page-subtitle">Забронируйте место прямо сейчас или задайте вопрос нашему администратору. Мы всегда на связи.</p>
         </div>
       </div>
     </section>
 
-    <!-- БЛОК 3: КОНТАКТЫ И КАРТА -->
-    <section class="contacts-info section">
+    <!-- БЛОК 2: ФОРМА БРОНИ (generate_lead) -->
+    <section class="booking-section section" data-event="generate_lead">
       <div class="container">
-        <div class="contacts-grid">
+        <div class="booking-wrapper">
           
-          <!-- Левая колонка с данными -->
-          <div class="contacts-card">
-            <h2 class="contacts-card__title">Наши координаты</h2>
+          <div class="booking-info">
+            <h2 class="booking-title">Онлайн-бронь</h2>
+            <p class="booking-desc">Заполните форму, и мы зарезервируем для вас игровое место. Если вы перешли с калькулятора, параметры вашей игры уже подставлены.</p>
             
-            <div class="contact-item">
-              <span class="contact-item__label">Адрес</span>
+            <div class="contact-item" style="margin-top: 32px;">
+              <span class="contact-item__label">Адрес клуба</span>
               <p class="contact-item__value">г. Москва, ул. Студенческая, д. 15<br>(в 2 минутах от главного корпуса)</p>
             </div>
-            
             <div class="contact-item">
               <span class="contact-item__label">Телефон</span>
-              <!-- data-event для аналитики -->
               <a href="tel:+79990000000" class="contact-item__value contact-item__link" data-event="contact_click">+7 (999) 000-00-00</a>
             </div>
+          </div>
+
+          <!-- Форма бронирования. Отправляет данные на thanks.html -->
+          <form class="booking-form" id="bookingForm" action="thanks.html" method="GET">
             
-            <div class="contact-item">
-              <span class="contact-item__label">Режим работы</span>
-              <p class="contact-item__value">Круглосуточно, 7 дней в неделю<br>(без выходных и праздников)</p>
+            <!-- Скрытые поля для передачи параметров из калькулятора (если нужно) -->
+            <input type="hidden" id="paramZone" name="zone" value="">
+            <input type="hidden" id="paramTotal" name="total" value="">
+
+            <div class="form-group">
+              <label for="bookZone" class="form-label">Зона</label>
+              <select id="bookZone" name="zone_display" class="form-control" required>
+                <option value="standard">Стандарт (200 ₽/час)</option>
+                <option value="vip">VIP (350 ₽/час)</option>
+                <option value="console">Консоли (250 ₽/час)</option>
+              </select>
             </div>
 
-            <div class="contact-item">
-              <span class="contact-item__label">Мы в соцсетях</span>
-              <div class="footer__socials" data-event="social_click" style="margin-top: 8px;">
-                <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
-                <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bookDate" class="form-label">Дата</label>
+                <input type="date" id="bookDate" name="date" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="bookTime" class="form-label">Время</label>
+                <input type="time" id="bookTime" name="time" class="form-control" required>
               </div>
             </div>
-          </div>
 
-                    <!-- Правая колонка с картой -->
-          <div class="contacts-map">
-            <!-- Статичный скриншот карты -->
-            <img src="img/bolvanka.jpg" alt="Схема проезда к компьютерному клубу РЕСПАУН" loading="lazy" class="map-image">
-          </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bookSeats" class="form-label">Кол-во мест</label>
+                <input type="number" id="bookSeats" name="seats" class="form-control" min="1" max="10" value="1" required>
+              </div>
+              <div class="form-group">
+                <label for="bookHours" class="form-label">Кол-во часов</label>
+                <input type="number" id="bookHours" name="hours" class="form-control" min="1" max="12" value="1" required>
+              </div>
+            </div>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- БЛОК 4: ФОРМА ОБРАТНОЙ СВЯЗИ -->
-    <section class="feedback-section section">
-      <div class="container">
-        <div class="feedback-wrapper">
-          <div class="feedback-info">
-            <h2 class="feedback-title">Остались вопросы?</h2>
-            <p class="feedback-desc">Оставьте свои контакты, и наш администратор свяжется с вами в ближайшее время. Поможем с выбором зоны, бронированием или проведением турнира.</p>
-          </div>
-
-          <form class="feedback-form" id="contactForm" action="thanks.html" method="GET">
             <div class="form-group">
-              <label for="contactName" class="form-label">Ваше имя</label>
-              <input type="text" id="contactName" name="name" class="form-control" placeholder="Иван" required>
+              <label for="bookName" class="form-label">Ваше имя</label>
+              <input type="text" id="bookName" name="name" class="form-control" placeholder="Иван" required>
             </div>
             
             <div class="form-group">
-              <label for="contactPhone" class="form-label">Телефон</label>
-              <input type="tel" id="contactPhone" name="phone" class="form-control" placeholder="+7 (999) 000-00-00" required>
-            </div>
-
-            <div class="form-group">
-              <label for="contactMessage" class="form-label">Сообщение (необязательно)</label>
-              <textarea id="contactMessage" name="message" class="form-control" rows="4" placeholder="Ваш вопрос..."></textarea>
+              <label for="bookPhone" class="form-label">Телефон</label>
+              <input type="tel" id="bookPhone" name="phone" class="form-control" placeholder="+7 (999) 000-00-00" required>
             </div>
 
             <!-- Согласие с политикой -->
             <div class="form-checkbox">
-              <input type="checkbox" id="contactAgree" name="agree" required>
-              <label for="contactAgree">
+              <input type="checkbox" id="bookAgree" name="agree" required>
+              <label for="bookAgree">
                 Я согласен с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
               </label>
             </div>
 
+            <!-- Итоговая цена (выводится динамически из JS, если пришли с калькулятора) -->
+            <div class="booking-total" id="bookingTotalDisplay" style="display: none;">
+              <span>К оплате:</span>
+              <strong id="bookingTotalPrice">0 ₽</strong>
+            </div>
+
             <button type="submit" class="btn btn--primary btn--large btn--full-width" data-event="form_submit">
-              Отправить сообщение
+              Подтвердить бронь
             </button>
           </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 3: МЕССЕНДЖЕРЫ (messenger_click) -->
+    <section class="messengers-section section" data-event="messenger_click">
+      <div class="container">
+        <div class="messengers-box">
+          <div class="messengers-box__content">
+            <h2 class="messengers-box__title">Нужна помощь?</h2>
+            <p class="messengers-box__text">Не хотите заполнять форму или есть срочный вопрос? Напишите нам напрямую в мессенджеры — ответим в течение 5 минут.</p>
+          </div>
+          
+          <div class="messengers-box__buttons">
+            <!-- Ссылки на мессенджеры -->
+            <a href="https://t.me/respawn_club" target="_blank" rel="noopener" class="btn btn--outline btn--large messenger-btn">
+              <span class="messenger-icon">✈️</span> Telegram
+            </a>
+            <a href="https://wa.me/79990000000" target="_blank" rel="noopener" class="btn btn--outline btn--large messenger-btn">
+              <span class="messenger-icon">💬</span> WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- БЛОК 5: ПОДВАЛ -->
+  <!-- БЛОК 4: ПОДВАЛ -->
   <footer class="footer">
     <div class="container footer__container">
       <div class="footer__info">

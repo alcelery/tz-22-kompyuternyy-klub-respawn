@@ -88,3 +88,39 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = `reaction.html?${hiddenParams.value}`;
   });
 });
+
+  // Логика выбора пакета
+  const packageButtons = document.querySelectorAll('.btn-select-package');
+  
+  packageButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Получаем данные из кнопки
+      const zoneValue = btn.dataset.zone;
+      const hoursValue = btn.dataset.hours;
+      // const priceValue = btn.dataset.price; // Фикс. цена, если понадобится
+
+      // 2. Подставляем значения в калькулятор
+      zoneSelect.value = zoneValue;
+      hoursInput.value = hoursValue;
+      seatsInput.value = 1; // Сбрасываем на 1 место
+      
+      // 3. Устанавливаем текущее время (или ближайшее)
+      const now = new Date();
+      const currentHours = String(now.getHours()).padStart(2, '0');
+      const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+      timeInput.value = `${currentHours}:${currentMinutes}`;
+
+      // 4. Пересчитываем стоимость
+      calculate();
+
+      // 5. Скроллим к калькулятору для наглядности
+      document.querySelector('.calculator-section').scrollIntoView({ behavior: 'smooth' });
+      
+      // 6. Небольшой визуальный эффект, чтобы привлечь внимание
+      const calcForm = document.getElementById('priceCalculator');
+      calcForm.style.boxShadow = '0 0 20px rgba(0, 230, 118, 0.5)';
+      setTimeout(() => {
+        calcForm.style.boxShadow = 'none';
+      }, 1000);
+    });
+  });

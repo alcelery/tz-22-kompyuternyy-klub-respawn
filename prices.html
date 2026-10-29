@@ -4,21 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO -->
   <title>Цены и тарифы | Компьютерный клуб РЕСПАУН</title>
   <meta name="description" content="Актуальные цены на игры в компьютерном клубе РЕСПАУН. Скидки студентам, ночные пакеты, выгодные абонементы. Рассчитайте стоимость онлайн.">
   
-  <!-- Open Graph -->
   <meta property="og:title" content="Цены и тарифы клуба РЕСПАУН">
   <meta property="og:description" content="Прозрачные цены. Скидка 30% до 14:00. Ночные пакеты. Рассчитайте свою игру.">
-  <meta property="og:image" content="https://respawn-club.ru/img/og-prices.webp">
+  <meta property="og:image" content="img/bolvanka.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://respawn-club.ru/prices.html">
   
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="img/bolvanka.jpg" type="image/jpeg">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
-  <!-- Подключаем скрипт для калькулятора -->
   <script src="js/calculator.js" defer></script>
 </head>
 <body class="page-prices">
@@ -53,7 +50,7 @@
   </header>
 
   <main>
-    <!-- БЛОК 2: ШАПКА СТРАНИЦЫ -->
+    <!-- ШАПКА СТРАНИЦЫ -->
     <section class="page-header">
       <div class="container">
         <nav class="breadcrumbs" aria-label="Хлебные крошки">
@@ -66,69 +63,8 @@
       </div>
     </section>
 
-    <!-- БЛОК 3: БАЗОВЫЕ ТАРИФЫ -->
-    <section class="prices-grid section">
-      <div class="container">
-        <div class="pricing-cards">
-          
-          <!-- Тариф Стандарт -->
-          <div class="pricing-card">
-            <h3 class="pricing-card__title">Стандарт</h3>
-            <div class="pricing-card__price">
-              <span class="pricing-card__amount">200 ₽</span>
-              <span class="pricing-card__period">/ час</span>
-            </div>
-            <ul class="pricing-card__features">
-              <li>RTX 3060 / 144Hz</li>
-              <li>Скидка студентам 30% до 14:00</li>
-              <li>Час: 200 ₽</li>
-              <li>3 часа: 500 ₽</li>
-              <li>5 часов: 800 ₽</li>
-            </ul>
-            <a href="reaction.html?zone=standard" class="btn btn--outline btn--full-width" data-event="cta_click">Забронировать</a>
-          </div>
-
-          <!-- Тариф VIP -->
-          <div class="pricing-card pricing-card--popular">
-            <div class="pricing-card__badge">Хит продаж</div>
-            <h3 class="pricing-card__title">VIP</h3>
-            <div class="pricing-card__price">
-              <span class="pricing-card__amount">350 ₽</span>
-              <span class="pricing-card__period">/ час</span>
-            </div>
-            <ul class="pricing-card__features">
-              <li>RTX 4070 / 240Hz</li>
-              <li>Скидка студентам 30% до 14:00</li>
-              <li>Час: 350 ₽</li>
-              <li>3 часа: 900 ₽</li>
-              <li>5 часов: 1400 ₽</li>
-            </ul>
-            <a href="reaction.html?zone=vip" class="btn btn--primary btn--full-width" data-event="cta_click">Забронировать</a>
-          </div>
-
-          <!-- Ночной пакет -->
-          <div class="pricing-card">
-            <h3 class="pricing-card__title">Ночной пакет</h3>
-            <div class="pricing-card__price">
-              <span class="pricing-card__amount">800 ₽</span>
-              <span class="pricing-card__period">/ с 23:00 до 08:00</span>
-            </div>
-            <ul class="pricing-card__features">
-              <li>Зона Стандарт</li>
-              <li>Фиксированная цена за 9 часов</li>
-              <li>Кофе и чай включены</li>
-              <li>Действует ежедневно</li>
-              <li class="pricing-card__feature--muted">VIP-зона: 1200 ₽</li>
-            </ul>
-            <a href="reaction.html?zone=night" class="btn btn--outline btn--full-width" data-event="cta_click">Забронировать</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- БЛОК 4: КАЛЬКУЛЯТОР -->
-    <section class="calculator-section section" data-event="calculator_use">
+    <!-- БЛОК 2: КАЛЬКУЛЯТОР (СОГЛАСНО СХЕМЕ - ПЕРВЫЙ) -->
+    <section class="calculator-section section" data-event="booking_calc">
       <div class="container">
         <div class="calc-wrapper">
           
@@ -170,7 +106,6 @@
               </div>
             </div>
 
-            <!-- Блок с результатом -->
             <div class="calc-result" id="calcResult">
               <div class="calc-result__row">
                 <span>Стоимость:</span>
@@ -181,7 +116,6 @@
               </div>
             </div>
 
-            <!-- Кнопка, передающая параметры -->
             <button type="button" class="btn btn--primary btn--large btn--glow btn--full-width" id="calcSubmitBtn" data-event="cta_click">
               Забронировать за <span id="btnTotalPrice">0</span> ₽
             </button>
@@ -192,21 +126,103 @@
       </div>
     </section>
 
-    <!-- БЛОК 5: CTA (ПОДВАЛ СТРАНИЦЫ) -->
-    <section class="cta-section section" data-event="cta_click">
+    <!-- БЛОК 3: ПАКЕТЫ (СОГЛАСНО СХЕМЕ - ВТОРОЙ) -->
+    <section class="packages-section section" data-event="package_select">
       <div class="container">
-        <div class="cta-box">
-          <h2 class="cta-box__title">Остались вопросы по тарифам?</h2>
-          <p class="cta-box__text">Позвоните нам или напишите в Telegram. Мы поможем подобрать оптимальный пакет под ваши задачи и количество человек.</p>
-          <a href="contacts.html" class="btn btn--primary btn--large btn--glow">
-            Связаться с нами
-          </a>
+        <h2 class="section__title">Выгодные пакеты</h2>
+        <p class="section__subtitle" style="color: var(--text-muted); margin-bottom: 32px;">Экономьте время и деньги. Выберите готовый пакет, и мы автоматически подставим его параметры в калькулятор.</p>
+        
+        <div class="pricing-cards">
+          
+          <!-- Пакет "Учеба" (3 часа) -->
+          <div class="pricing-card">
+            <h3 class="pricing-card__title">Студенческий</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">450 ₽</span>
+              <span class="pricing-card__period">/ 3 часа</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li>Зона Стандарт</li>
+              <li>Действует с 08:00 до 16:00</li>
+              <li>Скидка 30% включена</li>
+              <li>Идеально между парами</li>
+            </ul>
+            <!-- data-атрибуты для кнопки "Выбрать" -->
+            <button class="btn btn--outline btn--full-width btn-select-package" 
+                    data-zone="standard" 
+                    data-hours="3" 
+                    data-price="450">
+              Выбрать
+            </button>
+          </div>
+
+          <!-- Пакет "Вечерний" (5 часов) -->
+          <div class="pricing-card pricing-card--popular">
+            <div class="pricing-card__badge">Хит продаж</div>
+            <h3 class="pricing-card__title">Вечерний</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">800 ₽</span>
+              <span class="pricing-card__period">/ 5 часов</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li>Зона Стандарт</li>
+              <li>Действует с 16:00 до 23:00</li>
+              <li>Фиксированная цена</li>
+              <li>Идеально для катки с друзьями</li>
+            </ul>
+            <button class="btn btn--primary btn--full-width btn-select-package" 
+                    data-zone="standard" 
+                    data-hours="5" 
+                    data-price="800">
+              Выбрать
+            </button>
+          </div>
+
+          <!-- Пакет "Ночной" -->
+          <div class="pricing-card">
+            <h3 class="pricing-card__title">Ночной марафон</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">1000 ₽</span>
+              <span class="pricing-card__period">/ с 23:00 до 08:00</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li>Зона VIP</li>
+              <li>Фиксированная цена за 9 часов</li>
+              <li>Кофе и чай включены</li>
+              <li>Действует ежедневно</li>
+            </ul>
+            <button class="btn btn--outline btn--full-width btn-select-package" 
+                    data-zone="vip" 
+                    data-hours="9" 
+                    data-price="1000">
+              Выбрать
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 4: ПРАВИЛА КЛУБА PDF (СОГЛАСНО СХЕМЕ - ТРЕТИЙ) -->
+    <section class="rules-section section" data-event="file_download">
+      <div class="container">
+        <div class="rules-box">
+          <div class="rules-box__content">
+            <h2 class="rules-box__title">Правила клуба</h2>
+            <p class="rules-box__text">Ознакомьтесь с правилами посещения компьютерного клуба «РЕСПАУН». Здесь описаны нормы поведения, правила бронирования и техника безопасности.</p>
+          </div>
+          <div class="rules-box__action">
+            <!-- Ссылка на PDF документ. Обязательно скачается при клике -->
+            <a href="docs/rules.pdf" download class="btn btn--primary btn--large">
+              Скачать PDF (1.2 МБ)
+            </a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- БЛОК 6: ПОДВАЛ -->
+  <!-- БЛОК 5: ПОДВАЛ -->
   <footer class="footer">
     <div class="container footer__container">
       <div class="footer__info">
