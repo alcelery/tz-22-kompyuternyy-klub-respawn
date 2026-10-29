@@ -757,3 +757,232 @@ ul {
     font-size: 20px;
   }
 }
+
+/* =========================================
+   КАРТОЧКИ ТАРИФОВ
+   ========================================= */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.pricing-card {
+  background-color: var(--surface-color);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--border-radius);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 230, 118, 0.3);
+}
+
+.pricing-card--popular {
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 30px rgba(0, 230, 118, 0.1);
+}
+
+.pricing-card__badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--accent-color);
+  color: #000;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.pricing-card__title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.pricing-card__price {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.pricing-card__amount {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.pricing-card__period {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.pricing-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  flex-grow: 1;
+}
+
+.pricing-card__features li {
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.pricing-card__features li:last-child {
+  border-bottom: none;
+}
+
+.pricing-card__feature--muted {
+  opacity: 0.7;
+}
+
+/* =========================================
+   КАЛЬКУЛЯТОР
+   ========================================= */
+.calculator-section {
+  background: linear-gradient(180deg, var(--bg-color) 0%, rgba(0, 230, 118, 0.03) 100%);
+}
+
+.calc-wrapper {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.calc-title {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.calc-desc {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Формы */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-label {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  /* Убираем стандартные стрелочки у number */
+  -moz-appearance: textfield;
+}
+
+.form-control::-webkit-outer-spin-button,
+.form-control::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+/* Результат */
+.calc-result {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 24px 0;
+  border-left: 4px solid var(--accent-color);
+}
+
+.calc-result__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.calc-result__price {
+  font-size: 32px;
+  color: var(--accent-color);
+  font-weight: 800;
+}
+
+.calc-result__discount {
+  margin-top: 12px;
+  color: var(--accent-color);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ ЦЕН И КАЛЬКУЛЯТОРА
+   ========================================= */
+@media (min-width: 768px) {
+  .pricing-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .form-row {
+    flex-direction: row;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+  }
+
+  .calc-wrapper {
+    padding: 48px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .calc-info {
+    flex: 1;
+    position: sticky;
+    top: 100px;
+  }
+
+  .calc-form {
+    flex: 1;
+    background: rgba(0,0,0,0.1);
+    padding: 32px;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+}

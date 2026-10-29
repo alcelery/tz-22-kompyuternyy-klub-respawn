@@ -3,36 +3,242 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Игровые зоны — РЕСПАУН</title>
-  <meta name="description" content="Игровые зоны компьютерного клуба РЕСПАУН: стандарт, VIP, консоли.">
-  <link rel="icon" href="img/favicon.ico">
+  
+  <!-- SEO -->
+  <title>Цены и тарифы | Компьютерный клуб РЕСПАУН</title>
+  <meta name="description" content="Актуальные цены на игры в компьютерном клубе РЕСПАУН. Скидки студентам, ночные пакеты, выгодные абонементы. Рассчитайте стоимость онлайн.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Цены и тарифы клуба РЕСПАУН">
+  <meta property="og:description" content="Прозрачные цены. Скидка 30% до 14:00. Ночные пакеты. Рассчитайте свою игру.">
+  <meta property="og:image" content="https://respawn-club.ru/img/og-prices.webp">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://respawn-club.ru/prices.html">
+  
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
+  <!-- Подключаем скрипт для калькулятора -->
+  <script src="js/calculator.js" defer></script>
 </head>
-<body class="page-zones">
+<body class="page-prices">
 
-  <!-- тот же header -->
+  <!-- БЛОК 1: ШАПКА И МЕНЮ -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
+      
+      <nav class="nav" id="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+          <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
+          <li class="nav__item"><a href="prices.html" class="nav__link nav__link--active" aria-current="page">Цены</a></li>
+          <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
+          <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
+          <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
   <main>
-    <!-- Блок 1: Заголовок страницы + хлебные крошки -->
-    <section class="page-head">
+    <!-- БЛОК 2: ШАПКА СТРАНИЦЫ -->
+    <section class="page-header">
       <div class="container">
-        <nav class="breadcrumbs">
-          <a href="index.html">Главная</a> / <span>Зоны</span>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <a href="index.html">Главная</a> <span class="breadcrumbs__sep">/</span> <span aria-current="page">Цены</span>
         </nav>
-        <h1>Игровые зоны</h1>
+        <div class="page-header__content">
+          <h1 class="page-title">Цены и тарифы</h1>
+          <p class="page-subtitle">Прозрачное ценообразование без скрытых платежей. Студентам скидка 30% до 14:00, а для ночных марафонов у нас есть специальные пакеты.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Блок 2: Перечень зон -->
-    <section class="zones-list">…</section>
+    <!-- БЛОК 3: БАЗОВЫЕ ТАРИФЫ -->
+    <section class="prices-grid section">
+      <div class="container">
+        <div class="pricing-cards">
+          
+          <!-- Тариф Стандарт -->
+          <div class="pricing-card">
+            <h3 class="pricing-card__title">Стандарт</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">200 ₽</span>
+              <span class="pricing-card__period">/ час</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li>RTX 3060 / 144Hz</li>
+              <li>Скидка студентам 30% до 14:00</li>
+              <li>Час: 200 ₽</li>
+              <li>3 часа: 500 ₽</li>
+              <li>5 часов: 800 ₽</li>
+            </ul>
+            <a href="reaction.html?zone=standard" class="btn btn--outline btn--full-width" data-event="cta_click">Забронировать</a>
+          </div>
 
-    <!-- Блок 3: CTA «Забронировать» -->
-    <section class="cta">…</section>
+          <!-- Тариф VIP -->
+          <div class="pricing-card pricing-card--popular">
+            <div class="pricing-card__badge">Хит продаж</div>
+            <h3 class="pricing-card__title">VIP</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">350 ₽</span>
+              <span class="pricing-card__period">/ час</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li>RTX 4070 / 240Hz</li>
+              <li>Скидка студентам 30% до 14:00</li>
+              <li>Час: 350 ₽</li>
+              <li>3 часа: 900 ₽</li>
+              <li>5 часов: 1400 ₽</li>
+            </ul>
+            <a href="reaction.html?zone=vip" class="btn btn--primary btn--full-width" data-event="cta_click">Забронировать</a>
+          </div>
+
+          <!-- Ночной пакет -->
+          <div class="pricing-card">
+            <h3 class="pricing-card__title">Ночной пакет</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">800 ₽</span>
+              <span class="pricing-card__period">/ с 23:00 до 08:00</span>
+            </div>
+            <ul class="pricing-card__features">
+              <li>Зона Стандарт</li>
+              <li>Фиксированная цена за 9 часов</li>
+              <li>Кофе и чай включены</li>
+              <li>Действует ежедневно</li>
+              <li class="pricing-card__feature--muted">VIP-зона: 1200 ₽</li>
+            </ul>
+            <a href="reaction.html?zone=night" class="btn btn--outline btn--full-width" data-event="cta_click">Забронировать</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 4: КАЛЬКУЛЯТОР -->
+    <section class="calculator-section section" data-event="calculator_use">
+      <div class="container">
+        <div class="calc-wrapper">
+          
+          <div class="calc-info">
+            <h2 class="calc-title">Калькулятор стоимости</h2>
+            <p class="calc-desc">Выберите параметры игры, чтобы узнать итоговую стоимость. Скидка 30% применяется автоматически при игре в будни с 08:00 до 14:00.</p>
+          </div>
+
+          <form class="calc-form" id="priceCalculator" onsubmit="event.preventDefault();">
+            
+            <div class="form-group">
+              <label for="calcZone" class="form-label">Зона</label>
+              <select id="calcZone" class="form-control" required>
+                <option value="standard" data-price="200">Стандарт (200 ₽/час)</option>
+                <option value="vip" data-price="350">VIP (350 ₽/час)</option>
+                <option value="console" data-price="250">Консоли (250 ₽/час)</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="calcDate" class="form-label">Дата</label>
+                <input type="date" id="calcDate" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="calcTime" class="form-label">Время начала</label>
+                <input type="time" id="calcTime" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="calcSeats" class="form-label">Кол-во мест</label>
+                <input type="number" id="calcSeats" class="form-control" min="1" max="5" value="1" required>
+              </div>
+              <div class="form-group">
+                <label for="calcHours" class="form-label">Кол-во часов</label>
+                <input type="number" id="calcHours" class="form-control" min="1" max="12" value="1" required>
+              </div>
+            </div>
+
+            <!-- Блок с результатом -->
+            <div class="calc-result" id="calcResult">
+              <div class="calc-result__row">
+                <span>Стоимость:</span>
+                <span id="calcTotalPrice" class="calc-result__price">0 ₽</span>
+              </div>
+              <div class="calc-result__discount" id="calcDiscountMsg" style="display: none;">
+                🎉 Применена студенческая скидка 30%!
+              </div>
+            </div>
+
+            <!-- Кнопка, передающая параметры -->
+            <button type="button" class="btn btn--primary btn--large btn--glow btn--full-width" id="calcSubmitBtn" data-event="cta_click">
+              Забронировать за <span id="btnTotalPrice">0</span> ₽
+            </button>
+            <input type="hidden" id="calcHiddenParams" name="calcParams" value="">
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 5: CTA (ПОДВАЛ СТРАНИЦЫ) -->
+    <section class="cta-section section" data-event="cta_click">
+      <div class="container">
+        <div class="cta-box">
+          <h2 class="cta-box__title">Остались вопросы по тарифам?</h2>
+          <p class="cta-box__text">Позвоните нам или напишите в Telegram. Мы поможем подобрать оптимальный пакет под ваши задачи и количество человек.</p>
+          <a href="contacts.html" class="btn btn--primary btn--large btn--glow">
+            Связаться с нами
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- тот же footer -->
-  <!-- те же скрипты -->
+  <!-- БЛОК 6: ПОДВАЛ -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__info">
+        <a href="index.html" class="logo footer__logo">РЕСПАУН</a>
+        <p class="footer__address">г. Москва, ул. Студенческая, д. 15<br>(в 2 минутах от главного корпуса)</p>
+      </div>
+      
+      <div class="footer__nav">
+        <h3 class="footer__title">Меню</h3>
+        <ul class="footer__list">
+          <li><a href="zones.html" class="footer__link">Зоны</a></li>
+          <li><a href="prices.html" class="footer__link">Цены</a></li>
+          <li><a href="games.html" class="footer__link">Игры</a></li>
+          <li><a href="tournament.html" class="footer__link">Турниры</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contacts">
+        <h3 class="footer__title">Контакты</h3>
+        <div class="footer__socials" data-event="social_click">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        </div>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+      </div>
+    </div>
+    
+    <div class="container footer__bottom">
+      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
+    </div>
+  </footer>
+
 </body>
 </html>
