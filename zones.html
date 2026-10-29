@@ -19,6 +19,8 @@
   <link rel="icon" href="img/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
+  <!-- Подключаем скрипт аналитики -->
+  <script src="js/analytics.js" defer></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVSBR67M78"></script>
@@ -38,7 +40,7 @@
     <div class="container header__container">
       <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
       
-            <nav class="nav" id="nav" aria-label="Главное меню">
+      <nav class="nav" id="nav" aria-label="Главное меню">
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
           <li class="nav__item"><a href="zones.html" class="nav__link nav__link--active" aria-current="page">Зоны</a></li>
@@ -51,9 +53,9 @@
       </nav>
 
       <div class="header__actions">
-        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" data-contact-type="phone" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
         <!-- Сделали кнопку бронирования в шапке более заметной -->
-        <a href="prices.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        <a href="prices.html" class="btn btn--primary btn--small" data-event="cta_click" data-button-name="header_book" data-page-section="header">Забронировать</a>
         
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
           <span class="burger__line"></span>
@@ -65,7 +67,7 @@
   </header>
 
   <main>
-        <!-- Заголовок страницы -->
+    <!-- Заголовок страницы -->
     <section class="page-header">
       <div class="container">
         <nav class="breadcrumbs" aria-label="Хлебные крошки">
@@ -80,9 +82,9 @@
       </div>
     </section>
 
-        <!-- БЛОК 2: КАРТОЧКИ ЗОН -->
+    <!-- БЛОК 2: КАРТОЧКИ ЗОН -->
     <section class="zones-detail section">
-      <div class="container" data-event="zone_view">
+      <div class="container">
         
         <!-- Зона Стандарт -->
         <article class="zone-detail-card" id="standard">
@@ -167,13 +169,13 @@
     </section>
 
     <!-- БЛОК 3: КНОПКА «ЗАБРОНИРОВАТЬ» -->
-    <section class="cta-section section" data-event="cta_click">
+    <section class="cta-section section">
       <div class="container">
         <div class="cta-box">
           <h2 class="cta-box__title">Определились с выбором?</h2>
           <p class="cta-box__text">Забронируйте игровое место прямо сейчас, чтобы не ждать в очереди. Онлайн-бронь занимает всего 1 минуту.</p>
-          <!-- Крупная CTA-кнопка -->
-          <a href="reaction.html" class="btn btn--primary btn--large btn--glow">
+          <!-- Крупная CTA-кнопка (добавили data-event) -->
+          <a href="reaction.html" class="btn btn--primary btn--large btn--glow" data-event="cta_click" data-button-name="zones_book" data-page-section="zones_cta">
             Забронировать место
           </a>
         </div>
@@ -201,11 +203,12 @@
 
       <div class="footer__contacts">
         <h3 class="footer__title">Контакты</h3>
-        <div class="footer__socials" data-event="social_click">
-          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
-          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        <!-- Добавили data-event -->
+        <div class="footer__socials">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" data-event="social_click" data-network="telegram" data-page-section="footer" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" data-event="social_click" data-network="vk" data-page-section="footer" aria-label="Мы во ВКонтакте">VK</a>
         </div>
-        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click" data-contact-type="phone">+7 (999) 000-00-00</a>
       </div>
     </div>
     

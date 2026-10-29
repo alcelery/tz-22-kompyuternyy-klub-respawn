@@ -18,6 +18,8 @@
   <script src="js/main.js" defer></script>
   <!-- Скрипт для парсинга данных брони -->
   <script src="js/thanks.js" defer></script>
+  <!-- Подключаем скрипт аналитики -->
+  <script src="js/analytics.js" defer></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVSBR67M78"></script>
@@ -50,9 +52,8 @@
       </nav>
 
       <div class="header__actions">
-        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
-        <!-- Сделали кнопку бронирования в шапке более заметной -->
-        <a href="prices.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" data-contact-type="phone" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <a href="prices.html" class="btn btn--primary btn--small" data-event="cta_click" data-button-name="header_book" data-page-section="header">Забронировать</a>
         
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
           <span class="burger__line"></span>
@@ -75,25 +76,25 @@
 
           <!-- Блок с деталями брони -->
           <div class="booking-ticket">
-                      <div class="booking-ticket">
-            <div class="ticket-row">
-              <span class="ticket-label">Номер брони:</span>
-              <strong class="ticket-value" id="ticketNumber">Загрузка...</strong>
+            <div class="booking-ticket">
+              <div class="ticket-row">
+                <span class="ticket-label">Номер брони:</span>
+                <strong class="ticket-value" id="ticketNumber">Загрузка...</strong>
+              </div>
+              <div class="ticket-row">
+                <span class="ticket-label">Зона:</span>
+                <strong class="ticket-value" id="ticketZone">Не указана</strong>
+              </div>
+              <div class="ticket-row">
+                <span class="ticket-label">Дата и время:</span>
+                <strong class="ticket-value" id="ticketTime">Не указаны</strong>
+              </div>
+              <!-- НОВАЯ СТРОКА ДЛЯ ЦЕНЫ -->
+              <div class="ticket-row">
+                <span class="ticket-label">К оплате:</span>
+                <strong class="ticket-value" id="ticketPrice" style="color: var(--accent-color); font-size: 24px;">0 ₽</strong>
+              </div>
             </div>
-            <div class="ticket-row">
-              <span class="ticket-label">Зона:</span>
-              <strong class="ticket-value" id="ticketZone">Не указана</strong>
-            </div>
-            <div class="ticket-row">
-              <span class="ticket-label">Дата и время:</span>
-              <strong class="ticket-value" id="ticketTime">Не указаны</strong>
-            </div>
-            <!-- НОВАЯ СТРОКА ДЛЯ ЦЕНЫ -->
-            <div class="ticket-row">
-              <span class="ticket-label">К оплате:</span>
-              <strong class="ticket-value" id="ticketPrice" style="color: var(--accent-color); font-size: 24px;">0 ₽</strong>
-            </div>
-          </div>
           </div>
 
         </div>
@@ -113,18 +114,19 @@
       </div>
     </section>
 
-    <!-- БЛОК 4: ССЫЛКИ НА СОЦСЕТИ (social_click) -->
-    <section class="social-section section" data-event="social_click">
+    <!-- БЛОК 4: ССЫЛКИ НА СОЦСЕТИ -->
+    <section class="social-section section">
       <div class="container">
         <div class="social-box">
           <h2 class="social-box__title">Будь на связи</h2>
           <p class="social-box__text">Подписывайтесь на наши соцсети, чтобы первыми узнавать о турнирах, акциях и свободных местах.</p>
           
           <div class="social-buttons">
-            <a href="https://t.me/respawn_club" target="_blank" rel="noopener" class="btn btn--outline btn--large social-btn">
+            <!-- Добавили data-event, data-network, data-page-section -->
+            <a href="https://t.me/respawn_club" target="_blank" rel="noopener" class="btn btn--outline btn--large social-btn" data-event="social_click" data-network="telegram" data-page-section="thanks_social">
               <span class="social-icon">✈️</span> Telegram
             </a>
-            <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" class="btn btn--outline btn--large social-btn">
+            <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" class="btn btn--outline btn--large social-btn" data-event="social_click" data-network="vk" data-page-section="thanks_social">
               <span class="social-icon">🔵</span> ВКонтакте
             </a>
           </div>
@@ -159,11 +161,12 @@
 
       <div class="footer__contacts">
         <h3 class="footer__title">Контакты</h3>
+        <!-- Добавили data-event, data-network, data-page-section -->
         <div class="footer__socials">
-          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
-          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" data-event="social_click" data-network="telegram" data-page-section="footer" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" data-event="social_click" data-network="vk" data-page-section="footer" aria-label="Мы во ВКонтакте">VK</a>
         </div>
-        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click" data-contact-type="phone">+7 (999) 000-00-00</a>
       </div>
     </div>
     

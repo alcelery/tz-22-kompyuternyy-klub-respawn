@@ -16,6 +16,8 @@
   <link rel="icon" href="img/favicon.png" type="image/jpeg">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
+  <!-- Подключаем скрипт аналитики -->
+  <script src="js/analytics.js" defer></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVSBR67M78"></script>
@@ -48,8 +50,10 @@
       </nav>
 
       <div class="header__actions">
-        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
-        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click" data-button-name="header_book">Забронировать</a>
+        <!-- Добавили data-contact-type -->
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" data-contact-type="phone" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <!-- Добавили data-button-name и data-page-section -->
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click" data-button-name="header_book" data-page-section="header">Забронировать</a>
         
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
           <span class="burger__line"></span>
@@ -75,7 +79,8 @@
           </p>
 
           <div class="error-actions">
-            <a href="index.html" class="btn btn--primary btn--large btn--glow" data-event="cta_click" data-button-name="404_home">
+            <!-- Добавили data-page-section -->
+            <a href="index.html" class="btn btn--primary btn--large btn--glow" data-event="cta_click" data-button-name="404_home" data-page-section="404">
               Вернуться на главную
             </a>
           </div>
@@ -116,11 +121,12 @@
 
       <div class="footer__contacts">
         <h3 class="footer__title">Контакты</h3>
-        <div class="footer__socials" data-event="social_click">
-          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
-          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        <!-- Добавили data-network и data-page-section -->
+        <div class="footer__socials">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" data-event="social_click" data-network="telegram" data-page-section="footer" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" data-event="social_click" data-network="vk" data-page-section="footer" aria-label="Мы во ВКонтакте">VK</a>
         </div>
-        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click" data-contact-type="phone">+7 (999) 000-00-00</a>
       </div>
     </div>
     
