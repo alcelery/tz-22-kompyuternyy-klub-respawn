@@ -3,36 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Игровые зоны — РЕСПАУН</title>
-  <meta name="description" content="Игровые зоны компьютерного клуба РЕСПАУН: стандарт, VIP, консоли.">
-  <link rel="icon" href="img/favicon.ico">
+  
+  <!-- SEO -->
+  <title>Игровые зоны и железо | Компьютерный клуб РЕСПАУН</title>
+  <meta name="description" content="Описание игровых зон компьютерного клуба РЕСПАУН. Узнайте характеристики ПК, видеокарты, мониторы и консоли в зонах Стандарт, VIP, Консоли и Буткемп.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Игровые зоны клуба РЕСПАУН">
+  <meta property="og:description" content="От RTX 3060 до RTX 4070. Выбери свою идеальную зону для игры.">
+  <meta property="og:image" content="https://respawn-club.ru/img/og-zones.webp">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://respawn-club.ru/zones.html">
+  
+  <!-- Favicon & Styles -->
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
 </head>
 <body class="page-zones">
 
-  <!-- тот же header -->
+  <!-- БЛОК 1: ШАПКА И МЕНЮ -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
+      
+      <nav class="nav" id="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+          <!-- Выделяем текущую страницу -->
+          <li class="nav__item"><a href="zones.html" class="nav__link nav__link--active" aria-current="page">Зоны</a></li>
+          <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
+          <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
+          <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
+          <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
   <main>
-    <!-- Блок 1: Заголовок страницы + хлебные крошки -->
-    <section class="page-head">
+        <!-- Заголовок страницы -->
+    <section class="page-header">
       <div class="container">
-        <nav class="breadcrumbs">
-          <a href="index.html">Главная</a> / <span>Зоны</span>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <a href="index.html">Главная</a> <span class="breadcrumbs__sep">/</span> <span aria-current="page">Зоны</span>
         </nav>
-        <h1>Игровые зоны</h1>
+        
+        <!-- Обертка для акцентного оформления -->
+        <div class="page-header__content">
+          <h1 class="page-title">Игровые зоны</h1>
+          <p class="page-subtitle">Мощное железо, идеальные мониторы и комфортные кресла. Выбирай зону под свои задачи и доминируй в любой игре.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Блок 2: Перечень зон -->
-    <section class="zones-list">…</section>
+        <!-- БЛОК 2: КАРТОЧКИ ЗОН (с характеристиками и фото) -->
+    <section class="zones-detail section">
+      <div class="container" data-event="zone_view">
+        
+        <!-- Зона Стандарт -->
+        <article class="zone-detail-card" id="standard">
+          <div class="zone-detail-card__image">
+            <img src="img/bolvanka.jpg" alt="Зона Стандарт в клубе РЕСПАУН" loading="lazy" width="600" height="400">
+          </div>
+          <div class="zone-detail-card__content">
+            <h2 class="zone-detail-card__title">Стандарт</h2>
+            <div class="zone-detail-card__desc">
+              <p>Отличный выбор для повседневных тренировок и катки с друзьями.</p>
+              <p>Сбалансированная сборка обеспечит стабильный FPS в популярных онлайн-играх без переплаты за топовое железо.</p>
+            </div>
+            
+            <ul class="specs-list">
+              <li class="specs-list__item"><span class="specs-list__label">Процессор:</span> <span class="specs-list__value">Intel Core i5-12400F</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Видеокарта:</span> <span class="specs-list__value">NVIDIA RTX 3060 (12GB)</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">ОЗУ:</span> <span class="specs-list__value">16GB DDR4 3200MHz</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Монитор:</span> <span class="specs-list__value">24" IPS, 144Hz, 1ms</span></li>
+            </ul>
+          </div>
+        </article>
 
-    <!-- Блок 3: CTA «Забронировать» -->
-    <section class="cta">…</section>
+        <!-- Зона VIP -->
+        <article class="zone-detail-card" id="vip">
+          <div class="zone-detail-card__image">
+            <img src="img/bolvanka.jpg" alt="VIP-зона в клубе РЕСПАУН" loading="lazy" width="600" height="400">
+          </div>
+          <div class="zone-detail-card__content">
+            <h2 class="zone-detail-card__title">VIP</h2>
+            <div class="zone-detail-card__desc">
+              <p>Максимальная производительность для киберспортсменов и стримеров.</p>
+              <p>Топовое железо, изолированные места и мониторы с высокой частотой обновления позволяют играть на максимумах даже в тяжелые проекты.</p>
+            </div>
+            
+            <ul class="specs-list">
+              <li class="specs-list__item"><span class="specs-list__label">Процессор:</span> <span class="specs-list__value">Intel Core i7-13700K</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Видеокарта:</span> <span class="specs-list__value">NVIDIA RTX 4070 (12GB)</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">ОЗУ:</span> <span class="specs-list__value">32GB DDR5 6000MHz</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Монитор:</span> <span class="specs-list__value">27" Fast IPS, 240Hz, 0.5ms</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Консольная зона -->
+        <article class="zone-detail-card" id="console">
+          <div class="zone-detail-card__image">
+            <img src="img/bolvanka.jpg" alt="Консольная зона в клубе РЕСПАУН" loading="lazy" width="600" height="400">
+          </div>
+          <div class="zone-detail-card__content">
+            <h2 class="zone-detail-card__title">Консоли</h2>
+            <div class="zone-detail-card__desc">
+              <p>Уютный диван, большой OLED-телевизор и актуальные консоли последнего поколения.</p>
+              <p>Идеальное место, чтобы расслабиться после пар, поиграть в эксклюзивы Sony или устроить турнир по FIFA с друзьями.</p>
+            </div>
+            
+            <ul class="specs-list">
+              <li class="specs-list__item"><span class="specs-list__label">Консоли:</span> <span class="specs-list__value">PlayStation 5 / Xbox Series X</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Телевизор:</span> <span class="specs-list__value">LG OLED 55", 4K, 120Hz</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Аудио:</span> <span class="specs-list__value">Домашний кинотеатр 5.1</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Контроллеры:</span> <span class="specs-list__value">DualSense / Xbox Gamepad</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Буткемп -->
+        <article class="zone-detail-card" id="bootcamp">
+          <div class="zone-detail-card__image">
+            <img src="img/bolvanka.jpg" alt="Буткемп для команд в клубе РЕСПАУН" loading="lazy" width="600" height="400">
+          </div>
+          <div class="zone-detail-card__content">
+            <h2 class="zone-detail-card__title">Буткемп</h2>
+            <div class="zone-detail-card__desc">
+              <p>Полностью изолированная комната для полноценных тренировок киберспортивных команд.</p>
+              <p>Здесь ничего не будет отвлекать от отработки тактик: отдельная дверь, собственная маркерная доска и усиленные сборки ПК уровня VIP.</p>
+            </div>
+            
+            <ul class="specs-list">
+              <li class="specs-list__item"><span class="specs-list__label">ПК:</span> <span class="specs-list__value">5 сборок уровня VIP</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Изоляция:</span> <span class="specs-list__value">Отдельная комната</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Место тренера:</span> <span class="specs-list__value">ПК + монитор для просмотра</span></li>
+              <li class="specs-list__item"><span class="specs-list__label">Бонус:</span> <span class="specs-list__value">Кулер с водой и кофе-машина</span></li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- БЛОК 3: КНОПКА «ЗАБРОНИРОВАТЬ» -->
+    <section class="cta-section section" data-event="cta_click">
+      <div class="container">
+        <div class="cta-box">
+          <h2 class="cta-box__title">Определились с выбором?</h2>
+          <p class="cta-box__text">Забронируйте игровое место прямо сейчас, чтобы не ждать в очереди. Онлайн-бронь занимает всего 1 минуту.</p>
+          <!-- Крупная CTA-кнопка -->
+          <a href="reaction.html" class="btn btn--primary btn--large btn--glow">
+            Забронировать место
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- тот же footer -->
-  <!-- те же скрипты -->
+  <!-- БЛОК 4: ПОДВАЛ -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__info">
+        <a href="index.html" class="logo footer__logo">РЕСПАУН</a>
+        <p class="footer__address">г. Москва, ул. Студенческая, д. 15<br>(в 2 минутах от главного корпуса)</p>
+      </div>
+      
+      <div class="footer__nav">
+        <h3 class="footer__title">Меню</h3>
+        <ul class="footer__list">
+          <li><a href="zones.html" class="footer__link">Зоны</a></li>
+          <li><a href="prices.html" class="footer__link">Цены</a></li>
+          <li><a href="games.html" class="footer__link">Игры</a></li>
+          <li><a href="tournament.html" class="footer__link">Турниры</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contacts">
+        <h3 class="footer__title">Контакты</h3>
+        <div class="footer__socials" data-event="social_click">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        </div>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+      </div>
+    </div>
+    
+    <div class="container footer__bottom">
+      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
+    </div>
+  </footer>
+
 </body>
 </html>

@@ -509,3 +509,251 @@ ul {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* =========================================
+   КАРТОЧКИ ЗОН (ZONES DETAIL)
+   ========================================= */
+.zones-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.zone-detail-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+  scroll-margin-top: 100px;
+}
+
+/* Картинка */
+.zone-detail-card__image {
+  width: 100%;
+}
+
+.zone-detail-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Контент (текст) */
+.zone-detail-card__content {
+  padding: 32px 24px; /* Отступы со всех сторон */
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Расстояние между заголовком, описанием и списком */
+}
+
+.zone-detail-card__title {
+  font-size: 28px;
+  color: var(--accent-color);
+  margin: 0;
+}
+
+/* Описание с абзацами */
+.zone-detail-card__desc {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.7; /* Воздух между строками */
+}
+
+.zone-detail-card__desc p {
+  margin-bottom: 16px; /* Расстояние между абзацами */
+}
+
+.zone-detail-card__desc p:last-child {
+  margin-bottom: 0;
+}
+
+/* Таблица характеристик */
+.specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.specs-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.specs-list__item:last-child {
+  border-bottom: none;
+}
+
+.specs-list__label {
+  color: var(--text-muted);
+}
+
+.specs-list__value {
+  color: var(--text-main);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ (Отступы на десктопе)
+   ========================================= */
+@media (min-width: 768px) {
+  .zone-detail-card {
+    flex-direction: row;
+    align-items: stretch; /* Картинка растягивается по высоте текста */
+  }
+  
+  .zone-detail-card:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+  
+  /* Картинка занимает 45% ширины */
+  .zone-detail-card__image {
+    flex: 0 0 45%;
+  }
+  
+  /* Текст занимает оставшееся место */
+  .zone-detail-card__content {
+    flex: 1;
+    padding: 48px; /* Увеличенные отступы для десктопа (воздух) */
+    justify-content: center; /* Центрируем текст по вертикали */
+  }
+}
+
+
+/* =========================================
+   CTA БЛОК (КНОПКА ЗАБРОНИРОВАТЬ)
+   ========================================= */
+.cta-section {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.cta-box {
+  background: linear-gradient(135deg, rgba(26, 29, 36, 1) 0%, rgba(0, 230, 118, 0.1) 100%);
+  border: 2px solid var(--accent-color);
+  border-radius: var(--border-radius);
+  padding: 48px 24px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 230, 118, 0.15);
+  
+  /* Делаем блок флекс-контейнером для управления отступами */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-box__title {
+  font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 16px; /* Отступ от заголовка до текста */
+}
+
+.cta-box__text {
+  font-size: 18px;
+  color: var(--text-muted);
+  /* Увеличиваем отступ снизу, чтобы кнопка не прилипала */
+  margin-top: 0;
+  margin-bottom: 32px; /* Вот здесь задается расстояние до кнопки */
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* На планшетах и десктопах делаем отступы еще больше */
+@media (min-width: 768px) {
+  .cta-box {
+    padding: 64px 48px;
+  }
+  
+  .cta-box__text {
+    margin-bottom: 40px; /* Еще больше воздуха на больших экранах */
+  }
+}
+
+/* =========================================
+   ШАПКА ВНУТРЕННИХ СТРАНИЦ (PAGE HEADER)
+   ========================================= */
+.page-header {
+  padding: 48px 0;
+  /* Легкий градиент от фирменного цвета к темному фону */
+  background: linear-gradient(180deg, rgba(0, 230, 118, 0.08) 0%, var(--bg-color) 100%);
+  margin-bottom: 40px;
+}
+
+.breadcrumbs {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.breadcrumbs a {
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+
+.breadcrumbs a:hover {
+  color: var(--accent-color);
+}
+
+.breadcrumbs__sep {
+  margin: 0 8px;
+}
+
+/* Контейнер для заголовка и описания */
+.page-header__content {
+  position: relative;
+  padding-left: 24px; /* Отступ для текста, чтобы он не наезжал на полосу */
+  border-left: 4px solid var(--accent-color); /* Неоновая полоса слева */
+}
+
+/* Сам заголовок */
+.page-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+  color: var(--text-main);
+  /* Легкое неоновое свечение для заголовка */
+  text-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+}
+
+/* Описание под заголовком */
+.page-subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 800px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ ШАПКИ
+   ========================================= */
+@media (min-width: 768px) {
+  .page-header {
+    padding: 64px 0;
+    margin-bottom: 60px;
+  }
+
+  .page-header__content {
+    padding-left: 32px;
+    border-left-width: 6px; /* Полоса чуть толще на десктопе */
+  }
+
+  .page-title {
+    font-size: 48px; /* Крупный, уверенный заголовок */
+  }
+
+  .page-subtitle {
+    font-size: 20px;
+  }
+}
