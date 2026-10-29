@@ -3,36 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Игровые зоны — РЕСПАУН</title>
-  <meta name="description" content="Игровые зоны компьютерного клуба РЕСПАУН: стандарт, VIP, консоли.">
-  <link rel="icon" href="img/favicon.ico">
+  
+  <!-- SEO -->
+  <title>Турниры | Компьютерный клуб РЕСПАУН</title>
+  <meta name="description" content="Турниры по CS2 и Dota 2 в компьютерном клубе РЕСПАУН. Регистрация на «Зимний кубок» по CS2. Регламент, даты и призовой фонд.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Турниры в клубе РЕСПАУН">
+  <meta property="og:description" content="Участвуй в турнирах по CS2 и Dota 2. Регистрируй команду на «Зимний кубок».">
+  <meta property="og:image" content="img/bolvanka.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://respawn-club.ru/tournament.html">
+  
+  <link rel="icon" href="img/bolvanka.jpg" type="image/jpeg">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
+  <!-- Скрипт для модального окна -->
+  <script src="js/tournament.js" defer></script>
 </head>
-<body class="page-zones">
+<body class="page-tournament">
 
-  <!-- тот же header -->
+  <!-- БЛОК 1: ШАПКА И МЕНЮ -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
+      
+      <nav class="nav" id="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+          <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
+          <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
+          <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
+          <li class="nav__item"><a href="tournament.html" class="nav__link nav__link--active" aria-current="page">Турниры</a></li>
+          <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
   <main>
-    <!-- Блок 1: Заголовок страницы + хлебные крошки -->
-    <section class="page-head">
+    <!-- ШАПКА СТРАНИЦЫ -->
+    <section class="page-header">
       <div class="container">
-        <nav class="breadcrumbs">
-          <a href="index.html">Главная</a> / <span>Зоны</span>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+          <a href="index.html">Главная</a> <span class="breadcrumbs__sep">/</span> <span aria-current="page">Турниры</span>
         </nav>
-        <h1>Игровые зоны</h1>
+        <div class="page-header__content">
+          <h1 class="page-title">Турниры</h1>
+          <p class="page-subtitle">Докажи, что твоя команда лучшая. Мы проводим регулярные соревнования по CS2 и Dota 2 с реальным призовым фондом.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Блок 2: Перечень зон -->
-    <section class="zones-list">…</section>
+    <!-- БЛОК 2: РЕГЛАМЕНТ И ДАТЫ (tournament_view) -->
+    <section class="tournament-info-section section" data-event="tournament_view">
+      <div class="container">
+        <div class="tournament-grid">
+          
+          <!-- Карточка турнира "Зимний кубок" -->
+          <div class="tournament-card">
+            <div class="tournament-card__badge">Регистрация открыта</div>
+            <h2 class="tournament-card__title">Зимний кубок по CS2</h2>
+            <p class="tournament-card__desc">Главное событие этой зимы. Собирай команду из 5 человек и сражайся за призовой фонд в 50 000 рублей.</p>
+            
+            <ul class="tournament-details">
+              <li class="tournament-details__item">
+                <span class="tournament-details__label">Дата финала:</span>
+                <span class="tournament-details__value">19 декабря 2026</span>
+              </li>
+              <li class="tournament-details__item">
+                <span class="tournament-details__label">Дисциплина:</span>
+                <span class="tournament-details__value">Counter-Strike 2</span>
+              </li>
+              <li class="tournament-details__item">
+                <span class="tournament-details__label">Формат:</span>
+                <span class="tournament-details__value">5v5, Single Elimination (до 1 поражения)</span>
+              </li>
+              <li class="tournament-details__item">
+                <span class="tournament-details__label">Взнос:</span>
+                <span class="tournament-details__value">1 000 ₽ с команды</span>
+              </li>
+            </ul>
+          </div>
 
-    <!-- Блок 3: CTA «Забронировать» -->
-    <section class="cta">…</section>
+          <!-- Информация о скидке и других турнирах -->
+          <div class="tournament-extra-info">
+            <div class="info-box">
+              <h3 class="info-box__title">🔥 Дневная скидка</h3>
+              <p class="info-box__text">С <strong>1 ноября 2026 года</strong> запускаем дневную скидку по будням. Идеальное время, чтобы собрать команду и отточить тактику перед турниром!</p>
+            </div>
+            
+            <div class="info-box">
+              <h3 class="info-box__title">🎮 Другие дисциплины</h3>
+              <p class="info-box__text">Мы также проводим турниры по <strong>Dota 2</strong>. Следите за афишей в наших социальных сетях, чтобы не пропустить регистрацию.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 3: РЕГЛАМЕНТ PDF (file_download) -->
+    <section class="rules-section section" data-event="file_download">
+      <div class="container">
+        <div class="rules-box">
+          <div class="rules-box__content">
+            <h2 class="rules-box__title">Регламент турнира</h2>
+            <p class="rules-box__text">Скачайте полный PDF-файл с правилами «Зимнего кубка». В нем описаны настройки серверов, правила дисквалификации и порядок проведения матчей.</p>
+          </div>
+          <div class="rules-box__action">
+            <!-- Кнопка скачивания PDF -->
+            <a href="docs/tournament-rules.pdf" download class="btn btn--primary btn--large">
+              Скачать регламент (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- БЛОК 4: КНОПКА РЕГИСТРАЦИИ (cta_click) -->
+    <section class="registration-section section" data-event="cta_click">
+      <div class="container">
+        <div class="cta-box">
+          <h2 class="cta-box__title">Готовы к бою?</h2>
+          <p class="cta-box__text">Заполните заявку на участие в турнире «Зимний кубок». Наш администратор свяжется с вами для подтверждения состава.</p>
+          
+          <!-- Кнопка открывает модальное окно -->
+          <button type="button" class="btn btn--primary btn--large btn--glow" id="openRegisterModal">
+            Зарегистрировать команду
+          </button>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- тот же footer -->
-  <!-- те же скрипты -->
+  <!-- МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal">
+      <button class="modal__close" id="closeRegisterModal" aria-label="Закрыть окно">✖</button>
+      <h2 class="modal__title">Заявка на турнир</h2>
+      <p class="modal__subtitle">Зимний кубок по CS2 (Финал: 19 декабря)</p>
+
+      <!-- Форма заявки. Отправляется на thanks.html -->
+      <form action="thanks.html" method="GET" class="modal-form">
+        <!-- Скрытое поле с типом заявки, как указано в схеме -->
+        <input type="hidden" name="type" value="tournament">
+        <input type="hidden" name="tournament" value="Зимний кубок CS2">
+
+        <div class="form-group">
+          <label for="teamName" class="form-label">Название команды</label>
+          <input type="text" id="teamName" name="team_name" class="form-control" placeholder="Например, Team Spirit" required>
+        </div>
+
+        <div class="form-group">
+          <label for="captainName" class="form-label">Имя капитана</label>
+          <input type="text" id="captainName" name="captain_name" class="form-control" placeholder="Ваше имя" required>
+        </div>
+
+        <div class="form-group">
+          <label for="captainPhone" class="form-label">Телефон капитана</label>
+          <input type="tel" id="captainPhone" name="phone" class="form-control" placeholder="+7 (999) 000-00-00" required>
+        </div>
+
+        <div class="form-group">
+          <label for="teamRoster" class="form-label">Состав команды (5 игроков)</label>
+          <textarea id="teamRoster" name="roster" class="form-control" rows="3" placeholder="Никнеймы игроков через запятую" required></textarea>
+        </div>
+
+        <div class="form-checkbox">
+          <input type="checkbox" id="tournamentAgree" name="agree" required>
+          <label for="tournamentAgree">
+            Я согласен с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--large btn--full-width">
+          Отправить заявку
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- БЛОК 5: ПОДВАЛ -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__info">
+        <a href="index.html" class="logo footer__logo">РЕСПАУН</a>
+        <p class="footer__address">г. Москва, ул. Студенческая, д. 15<br>(в 2 минутах от главного корпуса)</p>
+      </div>
+      
+      <div class="footer__nav">
+        <h3 class="footer__title">Меню</h3>
+        <ul class="footer__list">
+          <li><a href="zones.html" class="footer__link">Зоны</a></li>
+          <li><a href="prices.html" class="footer__link">Цены</a></li>
+          <li><a href="games.html" class="footer__link">Игры</a></li>
+          <li><a href="tournament.html" class="footer__link">Турниры</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contacts">
+        <h3 class="footer__title">Контакты</h3>
+        <div class="footer__socials" data-event="social_click">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        </div>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+      </div>
+    </div>
+    
+    <div class="container footer__bottom">
+      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
+    </div>
+  </footer>
+
 </body>
 </html>
