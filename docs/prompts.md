@@ -427,7 +427,7 @@
 
 **Что получилось:** 
 
-Обновленный calculator.js, reaction-game.js, form.js с рабочими ивентами и подключенным analytics.js, но событие form_error не срабатывало.
+Обновленный calculator.js, reaction-game.js, form.js с рабочими ивентами и подключенным analytics.js, но событие form_error и generate_lead не срабатывало.
 
 **Что пришлось исправить вручную:**
 
@@ -442,7 +442,7 @@
 
 **Что получилось:** 
 
-Обновленный form.js с исправленным событием form_error.
+Обновленный form.js, thanks.js с исправленным событием form_error, generate_lead.
 
 **Что пришлось исправить вручную:**
 
