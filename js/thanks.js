@@ -50,4 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ticketTime.textContent = 'Сегодня (уточните время у администратора)';
     }
   }
+  
+  // ... в конце функции document.addEventListener('DOMContentLoaded', () => { ...
+
+  const ticketPrice = document.getElementById('ticketPrice');
+  const totalPrice = urlParams.get('total');
+
+  if (ticketPrice && totalPrice) {
+    ticketPrice.textContent = `${totalPrice} ₽`;
+  }
 });
