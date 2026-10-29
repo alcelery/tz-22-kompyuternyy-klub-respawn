@@ -1824,3 +1824,178 @@ ul {
     flex: 1;
   }
 }
+
+/* =========================================
+   СТРАНИЦА БЛАГОДАРНОСТИ (THANKS)
+   ========================================= */
+
+.thanks-section {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.thanks-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.thanks-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+.thanks-title {
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: var(--accent-color);
+}
+
+.thanks-subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+/* Карточка брони (тикет) */
+.booking-ticket {
+  background-color: var(--surface-color);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  text-align: left;
+  position: relative;
+}
+
+/* Зубчики по бокам для эффекта оторванного билета */
+.booking-ticket::before,
+.booking-ticket::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.booking-ticket::before { left: -11px; border-right: 1px dashed rgba(255, 255, 255, 0.2); }
+.booking-ticket::after { right: -11px; border-left: 1px dashed rgba(255, 255, 255, 0.2); }
+
+.ticket-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ticket-row:last-child {
+  border-bottom: none;
+}
+
+.ticket-label {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.ticket-value {
+  font-size: 18px;
+  color: var(--text-main);
+  text-align: right;
+}
+
+#ticketNumber {
+  color: var(--accent-color);
+  font-family: monospace;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* Блок предупреждения (15 минут) */
+.warning-box {
+  background-color: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.warning-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.warning-title {
+  font-size: 20px;
+  color: #ffc107;
+  margin-bottom: 8px;
+}
+
+.warning-text {
+  color: var(--text-main);
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Блок соцсетей */
+.social-box {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  padding: 40px 24px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.social-box__title {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.social-box__text {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18px;
+}
+
+.social-icon {
+  font-size: 24px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Адаптив */
+@media (min-width: 768px) {
+  .thanks-title { font-size: 48px; }
+  .social-buttons { flex-direction: row; }
+  .social-btn { min-width: 200px; }
+}

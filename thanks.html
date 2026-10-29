@@ -3,36 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Игровые зоны — РЕСПАУН</title>
-  <meta name="description" content="Игровые зоны компьютерного клуба РЕСПАУН: стандарт, VIP, консоли.">
-  <link rel="icon" href="img/favicon.ico">
+  
+  <!-- SEO (Закрываем от индексации, так как это служебная страница) -->
+  <title>Спасибо за бронь | Компьютерный клуб РЕСПАУН</title>
+  <meta name="description" content="Ваша бронь успешно создана. Ждем вас в компьютерном клубе РЕСПАУН!">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Бронь подтверждена | РЕСПАУН">
+  <meta property="og:image" content="img/bolvanka.jpg">
+  
+  <link rel="icon" href="img/bolvanka.jpg" type="image/jpeg">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pages.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/main.js" defer></script>
+  <!-- Скрипт для парсинга данных брони -->
+  <script src="js/thanks.js" defer></script>
 </head>
-<body class="page-zones">
+<body class="page-thanks">
 
-  <!-- тот же header -->
+  <!-- БЛОК 1: ШАПКА И МЕНЮ -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="index.html" class="logo" aria-label="РЕСПАУН - на главную">РЕСПАУН</a>
+      
+      <nav class="nav" id="nav" aria-label="Главное меню">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+          <li class="nav__item"><a href="zones.html" class="nav__link">Зоны</a></li>
+          <li class="nav__item"><a href="prices.html" class="nav__link">Цены</a></li>
+          <li class="nav__item"><a href="games.html" class="nav__link">Игры</a></li>
+          <li class="nav__item"><a href="tournament.html" class="nav__link">Турниры</a></li>
+          <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+79990000000" class="header__phone" data-event="contact_click" aria-label="Позвонить нам">+7 (999) 000-00-00</a>
+        <a href="reaction.html" class="btn btn--primary btn--small" data-event="cta_click">Забронировать</a>
+        
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
   <main>
-    <!-- Блок 1: Заголовок страницы + хлебные крошки -->
-    <section class="page-head">
+    <!-- БЛОК 2: БЛАГОДАРНОСТЬ И ДАННЫЕ БРОНИ -->
+    <section class="thanks-section section">
       <div class="container">
-        <nav class="breadcrumbs">
-          <a href="index.html">Главная</a> / <span>Зоны</span>
-        </nav>
-        <h1>Игровые зоны</h1>
+        <div class="thanks-wrapper">
+          
+          <div class="thanks-icon">🎉</div>
+          <h1 class="thanks-title">Спасибо! Бронь создана.</h1>
+          <p class="thanks-subtitle">Мы отправили данные администратору. Ждем вас в клубе!</p>
+
+          <!-- Блок с деталями брони -->
+          <div class="booking-ticket">
+            <div class="ticket-row">
+              <span class="ticket-label">Номер брони:</span>
+              <strong class="ticket-value" id="ticketNumber">Загрузка...</strong>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Зона:</span>
+              <strong class="ticket-value" id="ticketZone">Не указана</strong>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Дата и время:</span>
+              <strong class="ticket-value" id="ticketTime">Не указаны</strong>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- Блок 2: Перечень зон -->
-    <section class="zones-list">…</section>
+    <!-- БЛОК 3: БРОНЬ ДЕРЖИТСЯ 15 МИНУТ -->
+    <section class="warning-section section">
+      <div class="container">
+        <div class="warning-box">
+          <div class="warning-icon">⏳</div>
+          <div class="warning-content">
+            <h2 class="warning-title">Внимание: бронь держится 15 минут</h2>
+            <p class="warning-text">Согласно правилам клуба, мы сохраняем за вами игровое место в течение 15 минут с момента указанного времени. Пожалуйста, не опаздывайте. Если вы задерживаетесь, свяжитесь с нами по телефону.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Блок 3: CTA «Забронировать» -->
-    <section class="cta">…</section>
+    <!-- БЛОК 4: ССЫЛКИ НА СОЦСЕТИ (social_click) -->
+    <section class="social-section section" data-event="social_click">
+      <div class="container">
+        <div class="social-box">
+          <h2 class="social-box__title">Будь на связи</h2>
+          <p class="social-box__text">Подписывайтесь на наши соцсети, чтобы первыми узнавать о турнирах, акциях и свободных местах.</p>
+          
+          <div class="social-buttons">
+            <a href="https://t.me/respawn_club" target="_blank" rel="noopener" class="btn btn--outline btn--large social-btn">
+              <span class="social-icon">✈️</span> Telegram
+            </a>
+            <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" class="btn btn--outline btn--large social-btn">
+              <span class="social-icon">🔵</span> ВКонтакте
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Кнопка возврата на главную -->
+    <div class="container text-center" style="margin-bottom: 60px;">
+      <a href="index.html" class="btn btn--primary">Вернуться на главную</a>
+    </div>
+
   </main>
 
-  <!-- тот же footer -->
-  <!-- те же скрипты -->
+  <!-- БЛОК 5: ПОДВАЛ -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__info">
+        <a href="index.html" class="logo footer__logo">РЕСПАУН</a>
+        <p class="footer__address">г. Москва, ул. Студенческая, д. 15<br>(в 2 минутах от главного корпуса)</p>
+      </div>
+      
+      <div class="footer__nav">
+        <h3 class="footer__title">Меню</h3>
+        <ul class="footer__list">
+          <li><a href="zones.html" class="footer__link">Зоны</a></li>
+          <li><a href="prices.html" class="footer__link">Цены</a></li>
+          <li><a href="games.html" class="footer__link">Игры</a></li>
+          <li><a href="tournament.html" class="footer__link">Турниры</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contacts">
+        <h3 class="footer__title">Контакты</h3>
+        <div class="footer__socials">
+          <a href="https://t.me/respawn_club" target="_blank" rel="noopener" aria-label="Мы в Telegram">TG</a>
+          <a href="https://vk.com/respawn_club" target="_blank" rel="noopener" aria-label="Мы во ВКонтакте">VK</a>
+        </div>
+        <a href="tel:+79990000000" class="footer__phone" data-event="contact_click">+7 (999) 000-00-00</a>
+      </div>
+    </div>
+    
+    <div class="container footer__bottom">
+      <p>&copy; 2025 Компьютерный клуб «РЕСПАУН». Все права защищены.</p>
+      <a href="privacy.html" class="footer__privacy">Политика конфиденциальности</a>
+    </div>
+  </footer>
+
 </body>
 </html>
