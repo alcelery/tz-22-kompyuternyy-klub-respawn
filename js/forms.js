@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   const bookingForm = document.getElementById('bookingForm');
-  if (!bookingForm) return;
+  if (!bookingForm) {
+    console.warn('[Forms] Форма bookingForm не найдена на странице');
+    return;
+  }
+
+  console.log('[Forms] Форма найдена, скрипт работает');
 
   const urlParams = new URLSearchParams(window.location.search);
 
-  // Подстановка параметров из URL (как было)
+  // Подстановка параметров из URL
   if (urlParams.has('zone')) {
     const zone = urlParams.get('zone');
     const date = urlParams.get('date');
@@ -48,36 +53,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // === ОБРАБОТКА ОТПРАВКИ И АНАЛИТИКА ===
+  // === ПЕРЕХВАТ ОТПРАВКИ ФОРМЫ ===
   bookingForm.addEventListener('submit', (e) => {
-    const phoneInput = document.getElementById('bookPhone');
-    const phoneValue = phoneInput.value.replace(/\D/g, '');
+    console.log('[Forms] Событие submit перехвачено');
+    
+    // Предотвращаем стандартную отправку, чтобы проверить данные
+    e.preventDefault();
 
-    // Ошибка: телефон короче 11 цифр
+    const phoneInput = document.getElementById('bookPhone');
+    const phoneValue = phoneInput.value.replace(/\D/g, ''); // Оставляем только цифры
+
+    // 1. Проверка на ошибку (телефон < 11 цифр)
     if (phoneValue.length < 11) {
-      e.preventDefault(); // Останавливаем отправку
+      console.warn('[Forms] Ошибка валидации: короткий телефон');
       
-      // 1. Отправляем form_error
+      // Отправляем form_error
       if (typeof window.sendFormError === 'function') {
         window.sendFormError('phone', 'invalid_format');
+        console.log('[Forms] Событие form_error отправлено');
+      } else {
+        console.error('[Forms] Функция sendFormError не найдена!');
       }
 
-      // Визуальная подсветка
+      // Визуально подсвечиваем
       phoneInput.style.borderColor = 'red';
       phoneInput.focus();
-      alert('Пожалуйста, введите корректный номер телефона.');
+      
+      // Убираем красную рамку через 3 секунды
+      setTimeout(() => { phoneInput.style.borderColor = ''; }, 3000);
       return;
     }
 
-    // Ошибок нет — отправляем generate_lead
+    // 2. Если ошибок нет — отправляем generate_lead
+    console.log('[Forms] Валидация пройдена, отправляем generate_lead');
+    
     if (typeof window.sendGenerateLead === 'function') {
       const zone = document.getElementById('bookZone').value;
       const total = document.getElementById('paramTotal').value || 0;
       
-      // Передаем тип 'booking', зону и сумму
+      // Отправляем событие
       window.sendGenerateLead('booking', zone, total);
+      console.log('[Forms] Событие generate_lead отправлено');
+    } else {
+      console.error('[Forms] Функция sendGenerateLead не найдена!');
     }
 
-    // Форма уходит на thanks.html своим ходом (по action="thanks.html")
+    // 3. Отправляем форму вручную с задержкой, чтобы GA4 успел отправить запрос
+    setTimeout(() => {
+      bookingForm.submit();
+    }, 300);
   });
 });
