@@ -68,4 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
   
   window.sendGenerateLead(type, zone, total);
   }
+
+  urlParams = new URLSearchParams(window.location.search);
+
+  // === ОТПРАВКА СОБЫТИЯ generate_lead ===
+  // Проверяем, не отправляли ли мы уже это событие в текущей сессии
+  if (!sessionStorage.getItem('lead_sent')) {
+    
+    // Берем данные из URL
+    const type = urlParams.get('type') || 'booking'; // если турнир - придет 'tournament'
+    const zone = urlParams.get('zone') || urlParams.get('zone_display') || 'unknown';
+    const total = urlParams.get('total') || 0;
+
+    // Отправляем событие
+    if (typeof window.sendGenerateLead === 'function') {
+      window.sendGenerateLead(type, zone, total);
+      console.log('[Thanks] Событие generate_lead отправлено');
+      
+      // Запоминаем, что лид уже отправлен, чтобы не дублировать при обновлении страницы
+      sessionStorage.setItem('lead_sent', 'true');
+    } else {
+      console.error('[Thanks] Функция sendGenerateLead не найдена!');
+    }
+  } else {
+    console.log('[Thanks] Событие generate_lead уже было отправлено ранее');
+  }
 });
