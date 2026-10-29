@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // ВКЛЮЧАЕМ РЕЖИМ ОТЛАДКИ ДЛЯ DEBUGVIEW (Не забудь убрать перед сдачей!)
-  if (typeof gtag === 'function') {
-    gtag('config', 'G-FVSBR67M78', { 'debug_mode': true });
-  }
 
   // Вспомогательная функция для безопасной отправки события
   function sendEvent(eventName, params = {}) {
