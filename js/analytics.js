@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+  
+  // =========================================================================
+  // 1. ПЕРЕХВАТ И СОХРАНЕНИЕ UTM-МЕТОК
+  // =========================================================================
+  const urlParams = new URLSearchParams(window.location.search);
+  const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  
+  // Если в URL есть метки, сохраняем их в sessionStorage
+  utmKeys.forEach(key => {
+    if (urlParams.has(key)) {
+      sessionStorage.setItem(key, urlParams.get(key));
+    }
+  });
+
+  // Функция для получения метки (сначала смотрим в URL, потом в хранилище)
+  function getUtmParam(key) {
+    return urlParams.get(key) || sessionStorage.getItem(key) || '';
+  }
 
   // Вспомогательная функция для безопасной отправки события
   function sendEvent(eventName, params = {}) {
@@ -10,6 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
           cleanParams[key] = String(params[key]).substring(0, 100); // Ограничение в 100 символов
         }
       }
+      
+      // Автоматически добавляем UTM-метки к каждому событию в GA4
+      const utmSource = getUtmParam('utm_source');
+      if (utmSource) {
+        cleanParams.utm_source = utmSource;
+        cleanParams.utm_medium = getUtmParam('utm_medium');
+        cleanParams.utm_campaign = getUtmParam('utm_campaign');
+        cleanParams.utm_content = getUtmParam('utm_content');
+      }
+
       gtag('event', eventName, cleanParams);
       console.log(`[GA4] Отправлено событие: ${eventName}`, cleanParams); // Для отладки в консоли
     } else {
@@ -21,24 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // УНИВЕРСАЛЬНЫЙ ОБРАБОТЧИК КЛИКОВ (События 8, 10, 11, 13, 15, 16, 17, 19)
   // =========================================================================
   document.body.addEventListener('click', (e) => {
-    // Ищем ближайший родительский элемент с атрибутом data-event
     const target = e.target.closest('[data-event]');
     if (!target) return;
 
     const eventName = target.getAttribute('data-event');
-    
-    // Собираем все data-атрибуты элемента в объект параметров
-    // Например: data-button-name="hero" станет button_name: "hero"
     const params = {};
     for (const attr of target.attributes) {
       if (attr.name.startsWith('data-') && attr.name !== 'data-event') {
-        // Превращаем data-button-name в button_name (snake_case)
         const paramName = attr.name.replace('data-', '').replace(/-/g, '_');
         params[paramName] = attr.value;
       }
     }
-
-    // Отправляем событие
     sendEvent(eventName, params);
   });
 
@@ -56,32 +77,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Событие 9: zone_view (Клик по карточке зоны)
-  // Навешиваем на карточки зон отдельно (чтобы не срабатывало на каждый клик)
+  // Событие 9: zone_view
   document.querySelectorAll('.zone-card, .zone-detail-card').forEach(card => {
     card.addEventListener('click', function(e) {
-      // Если кликнули по кнопке "Забронировать" внутри карточки, не шлем zone_view (там сработает cta_click)
       if (e.target.closest('.btn')) return; 
-      
       const zoneId = this.id || this.getAttribute('href')?.split('#')[1] || 'unknown';
       sendEvent('zone_view', { zone: zoneId });
     });
   });
 
-  // Событие 10: booking_calc (Расчет в калькуляторе)
-  // Вызываем из calculator.js при каждом изменении полей
+  // Событие 10: booking_calc
   window.sendBookingCalc = function(zone, seats, hours, timeBand, totalPrice) {
     sendEvent('booking_calc', {
       zone: zone,
       seats: seats,
       hours: hours,
-      time_band: timeBand, // weekday_day, weekday_evening, weekend, night
+      time_band: timeBand,
       total_price: totalPrice
     });
   };
 
-  // Событие 12: game_search (Поиск игры)
-  // ТЗ требует отправлять через 1 секунду после ввода
+  // Событие 12: game_search
   let searchTimeout;
   const searchInput = document.getElementById('gameSearch');
   if (searchInput) {
@@ -91,57 +107,55 @@ document.addEventListener('DOMContentLoaded', () => {
         const term = e.target.value.trim();
         if (term.length > 0) {
           const resultsCount = document.querySelectorAll('.game-card[style*="display: flex"], .game-card:not([style*="display: none"])').length;
-          sendEvent('game_search', {
-            search_term: term,
-            results_count: resultsCount
-          });
+          sendEvent('game_search', { search_term: term, results_count: resultsCount });
         }
-      }, 1000); // Задержка 1 секунда
+      }, 1000);
     });
   }
 
-  // Событие 14: reaction_test_complete (Пятая попытка теста)
-  // Вызываем из reaction-game.js после 5-й попытки
+  // Событие 14: reaction_test_complete
   window.sendReactionComplete = function(reactionMs) {
-    sendEvent('reaction_test_complete', {
-      reaction_ms: reactionMs
-    });
+    sendEvent('reaction_test_complete', { reaction_ms: reactionMs });
   };
 
   // Событие 18: form_error
   window.sendFormError = function(fieldName, errorType) {
-    sendEvent('form_error', {
-      field_name: fieldName,
-      error_type: errorType
-    });
+    sendEvent('form_error', { field_name: fieldName, error_type: errorType });
   };
 
-  // =========================================================================
-  // СОБЫТИЕ 13: tournament_view (Просмотр турнира)
-  // =========================================================================
-  const tournamentLinks = document.querySelectorAll('a[href*="tournament.html"]');
-  tournamentLinks.forEach(link => {
+  // Событие 13: tournament_view
+  document.querySelectorAll('a[href*="tournament.html"]').forEach(link => {
     link.addEventListener('click', () => {
-      sendEvent('tournament_view', {
-        tournament_id: 'winter_cup_2026' // ID турнира
-      });
+      sendEvent('tournament_view', { tournament_id: 'winter_cup_2026' });
     });
   });
 
-  // =========================================================================
-  // СОБЫТИЕ 20: video_play (Запуск видео)
-  // =========================================================================
+  // Событие 20: video_play
   const clubVideo = document.getElementById('clubVideo');
   if (clubVideo) {
-    let videoStarted = false; // Флаг, чтобы не отправлять событие при паузе/возобновлении
+    let videoStarted = false;
     clubVideo.addEventListener('play', () => {
       if (!videoStarted) {
-        sendEvent('video_play', {
-          video_title: 'Атмосфера клуба' // Название видео
-        });
+        sendEvent('video_play', { video_title: 'Атмосфера клуба' });
         videoStarted = true;
       }
     });
   }
+
+  // =========================================================================
+  // 3. ДОБАВЛЕНИЕ UTM-МЕТОК ВО ВСЕ ФОРМЫ
+  // =========================================================================
+  document.querySelectorAll('form').forEach(form => {
+    utmKeys.forEach(key => {
+      const value = getUtmParam(key);
+      if (value) {
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = key;
+        hiddenInput.value = value;
+        form.appendChild(hiddenInput);
+      }
+    });
+  });
 
 });

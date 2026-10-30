@@ -98,9 +98,28 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('[Forms] Функция sendGenerateLead не найдена!');
     }
 
-    // 3. Отправляем форму вручную с задержкой, чтобы GA4 успел отправить запрос
+    // 3. Собираем UTM-метки для передачи в URL (ДОБАВЛЕНО ДЛЯ UTM)
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    let utmString = '';
+    utmKeys.forEach(key => {
+      const val = sessionStorage.getItem(key);
+      if (val) utmString += `&${key}=${encodeURIComponent(val)}`;
+    });
+
+    // 4. Отправляем форму вручную с задержкой, чтобы GA4 успел отправить запрос
     setTimeout(() => {
-      bookingForm.submit();
+      // Собираем все данные формы (включая скрытые поля)
+      const formData = new FormData(bookingForm);
+      const params = new URLSearchParams(formData);
+      
+      // Добавляем UTM-метки, если они есть
+      utmKeys.forEach(key => {
+        const val = sessionStorage.getItem(key);
+        if (val) params.append(key, val);
+      });
+
+      // Переходим на thanks.html со всеми параметрами
+      window.location.href = `thanks.html?${params.toString()}`;
     }, 300);
   });
 });
