@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bookingForm = document.getElementById('bookingForm');
   if (!bookingForm) return;
 
-  // ВСТАВЬ СЮДА СВОЮ ССЫЛКУ ОТ APPS SCRIPT:
+  // Твоя ссылка от Apps Script
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzQvo-QUbqv-ksTQgPxTQG6-JrtBk5XtzeLlxQEiV5hR-2hi9RNX_dyth5hA5mFAd_M/exec';
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // === ОТПРАВКА ФОРМЫ В GOOGLE ТАБЛИЦУ (ИСПРАВЛЕНО) ===
+  // === ОТПРАВКА ФОРМЫ В GOOGLE ТАБЛИЦУ ===
   bookingForm.addEventListener('submit', (e) => {
     e.preventDefault(); // Останавливаем стандартный переход
 
@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
       return v.toString(16);
     }).toUpperCase();
 
-    // Собираем данные вручную (НЕ через FormData, чтобы Apps Script понял)
+    // Собираем данные (ВАЖНО: используем URLSearchParams)
     const formData = new FormData(bookingForm);
-    const data = new URLSearchParams(formData); // <--- ВОТ ГЛАВНОЕ ИСПРАВЛЕНИЕ
+    const data = new URLSearchParams(formData); 
 
     // Добавляем обязательные поля для Apps Script
     data.append('request_id', reqId);
@@ -98,31 +98,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Отправляем
     fetch(SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors', // Важно для Apps Script
+      // УБРАЛИ mode: 'no-cors', чтобы прочитать ответ
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded' // <--- ВАЖНО
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: data
     })
-    .then(() => {
-      // Режим no-cors не дает прочитать ответ, поэтому просто считаем, что всё ок
-      if (typeof window.sendGenerateLead === 'function') {
-        const zone = document.getElementById('bookZone').value;
-        const total = document.getElementById('paramTotal').value || 0;
-        window.sendGenerateLead('booking', zone, total);
+    .then(response => {
+      // Пробуем распарсить JSON
+      return response.json();
+    })
+    .then(resData => {
+      console.log('Ответ от Apps Script:', resData); // Смотрим в консоль
+
+      if (resData.ok) {
+        // ВСЁ УСПЕШНО
+        if (typeof window.sendGenerateLead === 'function') {
+          const zone = document.getElementById('bookZone').value;
+          const total = document.getElementById('paramTotal').value || 0;
+          window.sendGenerateLead('booking', zone, total);
+        }
+        
+        const params = new URLSearchParams();
+        params.append('zone', document.getElementById('bookZone').value);
+        params.append('date', document.getElementById('bookDate').value);
+        params.append('time', document.getElementById('bookTime').value);
+        params.append('total', document.getElementById('paramTotal').value || '0');
+        
+        window.location.href = `thanks.html?${params.toString()}`;
+      } else {
+        // ОШИБКА СЕРВЕРА (таблица отклонила)
+        console.error("Ошибка сервера Apps Script:", resData);
+        alert("Таблица отклонила заявку. Причина: " + (resData.error || "Неизвестно") + "\nДетали: " + JSON.stringify(resData));
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
       }
-      
-      const params = new URLSearchParams();
-      params.append('zone', document.getElementById('bookZone').value);
-      params.append('date', document.getElementById('bookDate').value);
-      params.append('time', document.getElementById('bookTime').value);
-      params.append('total', document.getElementById('paramTotal').value || '0');
-      
-      window.location.href = `thanks.html?${params.toString()}`;
     })
     .catch(error => {
-      console.error('Ошибка сети:', error);
-      alert('Ошибка соединения. Проверьте интернет.');
+      // ОШИБКА СЕТИ ИЛИ CORS
+      console.error('Ошибка сети/CORS:', error);
+      alert('Ошибка соединения. Проверьте интернет или настройки CORS.');
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
     });
