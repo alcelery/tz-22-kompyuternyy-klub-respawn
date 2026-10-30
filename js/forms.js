@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!bookingForm) return;
 
   // ВСТАВЬ СЮДА СВОЮ ССЫЛКУ ОТ APPS SCRIPT:
-  const SCRIPT_URL = 'https://script.google.com/macros/s/ТВОЙ_ДЛИННЫЙ_КОД/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVRP5PQfeoACTo-tpZ5ryYWoB1UXco-ibt4COwiSF9Rpc7EZQXpfbNd0_A8g-Z6SI/exec';
 
   const urlParams = new URLSearchParams(window.location.search);
 
