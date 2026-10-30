@@ -131,4 +131,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // =========================================================================
+  // 4. ПЕРЕДАЧА UTM-МЕТОК ПРИ ПЕРЕХОДЕ ПО ССЫЛКАМ (ЧТОБЫ ОНИ НЕ ПРОПАДАЛИ)
+  // =========================================================================
+  document.body.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    // Проверяем, что это внутренняя ссылка (не внешняя, не якорь, не mailto/tel)
+    if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+      return;
+    }
+
+    // Проверяем, есть ли сохраненные метки
+    const utms = window.getUtmParams();
+    if (Object.keys(utms).length === 0) return; // Если меток нет, ничего не делаем
+
+    // Если ссылка уже содержит UTM-метки, не дублируем их
+    if (href.includes('utm_')) return;
+
+    e.preventDefault(); // Останавливаем стандартный переход
+
+    // Формируем новую ссылку с метками
+    const url = new URL(href, window.location.origin);
+    for (const key in utms) {
+      url.searchParams.set(key, utms[key]);
+    }
+
+    // Переходим по новой ссылке
+    window.location.href = url.toString();
+  });
 });
