@@ -7,6 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('[Forms] Форма найдена, скрипт работает');
 
+  // === 1. ДОБАВЛЯЕМ СКРЫТЫЕ ПОЛЯ С UTM-МЕТКАМИ В ФОРМУ ===
+  if (typeof window.getUtmParams === 'function') {
+    const utms = window.getUtmParams();
+    for (const key in utms) {
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = key;
+      hiddenInput.value = utms[key];
+      bookingForm.appendChild(hiddenInput);
+      console.log(`[Forms] Добавлено скрытое поле: ${key} = ${utms[key]}`);
+    }
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
 
   // Подстановка параметров из URL
@@ -53,73 +66,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // === ПЕРЕХВАТ ОТПРАВКИ ФОРМЫ ===
+  // === 2. ВАЛИДАЦИЯ И ОТПРАВКА (БЕЗ ПЕРЕХВАТА) ===
   bookingForm.addEventListener('submit', (e) => {
-    console.log('[Forms] Событие submit перехвачено');
-    
-    // Предотвращаем стандартную отправку, чтобы проверить данные
-    e.preventDefault();
-
     const phoneInput = document.getElementById('bookPhone');
-    const phoneValue = phoneInput.value.replace(/\D/g, ''); // Оставляем только цифры
+    const phoneValue = phoneInput.value.replace(/\D/g, '');
 
-    // 1. Проверка на ошибку (телефон < 11 цифр)
+    // Проверка на ошибку (телефон < 11 цифр)
     if (phoneValue.length < 11) {
-      console.warn('[Forms] Ошибка валидации: короткий телефон');
+      e.preventDefault(); // Останавливаем отправку только при ошибке
       
-      // Отправляем form_error
       if (typeof window.sendFormError === 'function') {
         window.sendFormError('phone', 'invalid_format');
-        console.log('[Forms] Событие form_error отправлено');
-      } else {
-        console.error('[Forms] Функция sendFormError не найдена!');
       }
 
-      // Визуально подсвечиваем
       phoneInput.style.borderColor = 'red';
       phoneInput.focus();
-      
-      // Убираем красную рамку через 3 секунды
       setTimeout(() => { phoneInput.style.borderColor = ''; }, 3000);
       return;
     }
 
-    // 2. Если ошибок нет — отправляем generate_lead
-    console.log('[Forms] Валидация пройдена, отправляем generate_lead');
-    
+    // Если ошибок нет, отправляем generate_lead
     if (typeof window.sendGenerateLead === 'function') {
       const zone = document.getElementById('bookZone').value;
       const total = document.getElementById('paramTotal').value || 0;
-      
-      // Отправляем событие
       window.sendGenerateLead('booking', zone, total);
       console.log('[Forms] Событие generate_lead отправлено');
-    } else {
-      console.error('[Forms] Функция sendGenerateLead не найдена!');
     }
-
-    // 3. Собираем UTM-метки для передачи в URL (ДОБАВЛЕНО ДЛЯ UTM)
-    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-    let utmString = '';
-    utmKeys.forEach(key => {
-      const val = sessionStorage.getItem(key);
-      if (val) utmString += `&${key}=${encodeURIComponent(val)}`;
-    });
-
-    // 4. Отправляем форму вручную с задержкой, чтобы GA4 успел отправить запрос
-    setTimeout(() => {
-      // Собираем все данные формы (включая скрытые поля)
-      const formData = new FormData(bookingForm);
-      const params = new URLSearchParams(formData);
-      
-      // Добавляем UTM-метки, если они есть
-      utmKeys.forEach(key => {
-        const val = sessionStorage.getItem(key);
-        if (val) params.append(key, val);
-      });
-
-      // Переходим на thanks.html со всеми параметрами
-      window.location.href = `thanks.html?${params.toString()}`;
-    }, 300);
+    
+    // Форма отправится сама, так как мы НЕ вызываем e.preventDefault()
   });
 });
