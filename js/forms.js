@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const urlParams = new URLSearchParams(window.location.search);
 
-  // Подстановка параметров из URL (как было)
+  // Подстановка параметров из URL
   if (urlParams.has('zone')) {
     const zone = urlParams.get('zone');
     const date = urlParams.get('date');
@@ -74,20 +74,32 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBtn.textContent = 'Отправка...';
     submitBtn.disabled = true;
 
+    // Скрываем старую ошибку, если она была
+    let errorBox = document.getElementById('formErrorBox');
+    if (errorBox) errorBox.style.display = 'none';
+
     // Генерируем request_id (упрощенный UUID)
     const reqId = 'REQ-' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     }).toUpperCase();
 
-    // Собираем данные (ВАЖНО: используем URLSearchParams)
+    // Собираем данные из формы (используем FormData)
     const formData = new FormData(bookingForm);
     const data = new URLSearchParams(formData); 
 
-    // Добавляем обязательные поля для Apps Script
+    // Добавляем обязательные поля
     data.append('request_id', reqId);
     data.append('lead_type', 'booking');
     
+    // === ДОБАВЛЯЕМ SLOT (ДАТА + ВРЕМЯ) ===
+    const dateVal = document.getElementById('bookDate').value;
+    const timeVal = document.getElementById('bookTime').value;
+    const finalTime = timeVal || '00:00'; // Если время не выбрано, ставим полночь
+    if (dateVal) {
+      data.append('slot', `${dateVal} ${finalTime}`);
+    }
+
     // Добавляем UTM-метки
     const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
     utmKeys.forEach(key => {
@@ -98,18 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Отправляем
     fetch(SCRIPT_URL, {
       method: 'POST',
-      // УБРАЛИ mode: 'no-cors', чтобы прочитать ответ
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: data
     })
-    .then(response => {
-      // Пробуем распарсить JSON
-      return response.json();
-    })
+    .then(response => response.json())
     .then(resData => {
-      console.log('Ответ от Apps Script:', resData); // Смотрим в консоль
+      console.log('Ответ от Apps Script:', resData);
 
       if (resData.ok) {
         // ВСЁ УСПЕШНО
@@ -121,23 +129,45 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const params = new URLSearchParams();
         params.append('zone', document.getElementById('bookZone').value);
-        params.append('date', document.getElementById('bookDate').value);
-        params.append('time', document.getElementById('bookTime').value);
+        params.append('date', dateVal);
+        params.append('time', timeVal);
         params.append('total', document.getElementById('paramTotal').value || '0');
         
         window.location.href = `thanks.html?${params.toString()}`;
       } else {
-        // ОШИБКА СЕРВЕРА (таблица отклонила)
+        // ОШИБКА СЕРВЕРА (БЕЗ ALERT)
         console.error("Ошибка сервера Apps Script:", resData);
-        alert("Таблица отклонила заявку. Причина: " + (resData.error || "Неизвестно") + "\nДетали: " + JSON.stringify(resData));
+        
+        if (!errorBox) {
+          errorBox = document.createElement('div');
+          errorBox.id = 'formErrorBox';
+          errorBox.style.color = '#ff4d4d';
+          errorBox.style.marginTop = '10px';
+          errorBox.style.fontSize = '14px';
+          submitBtn.parentNode.insertBefore(errorBox, submitBtn);
+        }
+        errorBox.textContent = 'Произошла ошибка при отправке. Пожалуйста, проверьте данные.';
+        errorBox.style.display = 'block';
+        
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
       }
     })
     .catch(error => {
-      // ОШИБКА СЕТИ ИЛИ CORS
+      // ОШИБКА СЕТИ
       console.error('Ошибка сети/CORS:', error);
-      alert('Ошибка соединения. Проверьте интернет или настройки CORS.');
+      
+      if (!errorBox) {
+        errorBox = document.createElement('div');
+        errorBox.id = 'formErrorBox';
+        errorBox.style.color = '#ff4d4d';
+        errorBox.style.marginTop = '10px';
+        errorBox.style.fontSize = '14px';
+        submitBtn.parentNode.insertBefore(errorBox, submitBtn);
+      }
+      errorBox.textContent = 'Ошибка соединения. Проверьте интернет и попробуйте снова.';
+      errorBox.style.display = 'block';
+      
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
     });
