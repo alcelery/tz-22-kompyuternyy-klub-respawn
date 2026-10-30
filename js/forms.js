@@ -1,28 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   const bookingForm = document.getElementById('bookingForm');
-  if (!bookingForm) {
-    console.warn('[Forms] Форма bookingForm не найдена на странице');
-    return;
-  }
+  if (!bookingForm) return;
 
-  console.log('[Forms] Форма найдена, скрипт работает');
-
-  // === 1. ДОБАВЛЯЕМ СКРЫТЫЕ ПОЛЯ С UTM-МЕТКАМИ В ФОРМУ ===
-  if (typeof window.getUtmParams === 'function') {
-    const utms = window.getUtmParams();
-    for (const key in utms) {
-      const hiddenInput = document.createElement('input');
-      hiddenInput.type = 'hidden';
-      hiddenInput.name = key;
-      hiddenInput.value = utms[key];
-      bookingForm.appendChild(hiddenInput);
-      console.log(`[Forms] Добавлено скрытое поле: ${key} = ${utms[key]}`);
-    }
-  }
+  // ВСТАВЬ СЮДА СВОЮ ССЫЛКУ ОТ APPS SCRIPT:
+  const SCRIPT_URL = 'https://script.google.com/macros/s/ТВОЙ_ДЛИННЫЙ_КОД/exec';
 
   const urlParams = new URLSearchParams(window.location.search);
 
-  // Подстановка параметров из URL
+  // Подстановка параметров из URL (как было)
   if (urlParams.has('zone')) {
     const zone = urlParams.get('zone');
     const date = urlParams.get('date');
@@ -66,33 +51,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // === 2. ВАЛИДАЦИЯ И ОТПРАВКА (БЕЗ ПЕРЕХВАТА) ===
+  // === ОТПРАВКА ФОРМЫ В GOOGLE ТАБЛИЦУ (ИСПРАВЛЕНО) ===
   bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Останавливаем стандартный переход
+
     const phoneInput = document.getElementById('bookPhone');
     const phoneValue = phoneInput.value.replace(/\D/g, '');
 
-    // Проверка на ошибку (телефон < 11 цифр)
+    // Проверка телефона
     if (phoneValue.length < 11) {
-      e.preventDefault(); // Останавливаем отправку только при ошибке
-      
       if (typeof window.sendFormError === 'function') {
         window.sendFormError('phone', 'invalid_format');
       }
-
       phoneInput.style.borderColor = 'red';
       phoneInput.focus();
       setTimeout(() => { phoneInput.style.borderColor = ''; }, 3000);
       return;
     }
 
-    // Если ошибок нет, отправляем generate_lead
-    if (typeof window.sendGenerateLead === 'function') {
-      const zone = document.getElementById('bookZone').value;
-      const total = document.getElementById('paramTotal').value || 0;
-      window.sendGenerateLead('booking', zone, total);
-      console.log('[Forms] Событие generate_lead отправлено');
-    }
+    const submitBtn = bookingForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Отправка...';
+    submitBtn.disabled = true;
+
+    // Генерируем request_id (упрощенный UUID)
+    const reqId = 'REQ-' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    }).toUpperCase();
+
+    // Собираем данные вручную (НЕ через FormData, чтобы Apps Script понял)
+    const formData = new FormData(bookingForm);
+    const data = new URLSearchParams(formData); // <--- ВОТ ГЛАВНОЕ ИСПРАВЛЕНИЕ
+
+    // Добавляем обязательные поля для Apps Script
+    data.append('request_id', reqId);
+    data.append('lead_type', 'booking');
     
-    // Форма отправится сама, так как мы НЕ вызываем e.preventDefault()
+    // Добавляем UTM-метки
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+    utmKeys.forEach(key => {
+      const val = sessionStorage.getItem(key);
+      if (val) data.append(key, val);
+    });
+
+    // Отправляем
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Важно для Apps Script
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded' // <--- ВАЖНО
+      },
+      body: data
+    })
+    .then(() => {
+      // Режим no-cors не дает прочитать ответ, поэтому просто считаем, что всё ок
+      if (typeof window.sendGenerateLead === 'function') {
+        const zone = document.getElementById('bookZone').value;
+        const total = document.getElementById('paramTotal').value || 0;
+        window.sendGenerateLead('booking', zone, total);
+      }
+      
+      const params = new URLSearchParams();
+      params.append('zone', document.getElementById('bookZone').value);
+      params.append('date', document.getElementById('bookDate').value);
+      params.append('time', document.getElementById('bookTime').value);
+      params.append('total', document.getElementById('paramTotal').value || '0');
+      
+      window.location.href = `thanks.html?${params.toString()}`;
+    })
+    .catch(error => {
+      console.error('Ошибка сети:', error);
+      alert('Ошибка соединения. Проверьте интернет.');
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    });
   });
 });
