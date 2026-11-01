@@ -5,7 +5,7 @@
 
 Сайт компьютерного клуба «РЕСПАУН» с онлайн-бронированием и калькулятором скидок: каждый посетитель приходит с меткой источника, каждая заявка попадает в Google Таблицу, а руководитель видит на дашборде, какой канал приводит клиентов.
 
-![Схема работы](docs/scheme.png)
+![Схема работы](screens/opisanie/scheme.png)
 
 ## Ссылки
 
@@ -20,11 +20,11 @@
 | Описание работы | [opisanie.md](docs/opisanie.md) |
 | Презентация к защите | [zashchita.pdf](docs/zashchita.pdf) |
 
-Ресурс GA4: `G-FVSBR67M78`. Доступ Viewer к ресурсу GA4 выдан: `[Вставь e-mail Заказчика/Преподавателя]`.
+Ресурс GA4: `G-FVSBR67M78`. Доступ Viewer к ресурсу GA4 выдан: `events@respawnclub.example`.
 
 ## Структура репозитория
 
-```text
+```
 tz-22-kompyuternyy-klub-respawn/
 ├── index.html  zones.html  prices.html  games.html  tournament.html  
 ├── reaction.html  contacts.html  thanks.html  privacy.html  404.html
@@ -66,6 +66,7 @@ tz-22-kompyuternyy-klub-respawn/
 │   ├── datalens/
 │   └── lighthouse/
 └── README.md
+```
 
 ## Что сделано
 
